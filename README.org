@@ -134,9 +134,9 @@
       =update.php= and =install.php= or match the last directive of
       the configuration:
 
-      =location ~* ^.+\.php$ {=
-         =return 404;= 
-      =}=
+      =location ~* ^.+\.php$ {
+         return 404; 
+      }=
 
       Returning a 404 (Not Found) for every PHP file not matched by
       all the previous locations.
