@@ -1,4 +1,4 @@
-
+# -*- mode: conf; mode: flyspell-prog; mode: autopair; ispell-current-dictionary: american -*-
 types {
     text/html                             html htm shtml;
     text/css                              css;
@@ -49,10 +49,18 @@ types {
     application/x-xpinstall               xpi;
     application/zip                       zip;
 
+    # Mime types for web fonts. Stolen from here:
+    # http://seconddrawer.com.au/blog/ in part.
+    application/x-font-ttf                ttf;
+    font/opentype                         otf;
+    application/vnd.ms-fontobject         eot;
+    #application/octet-stream              otf ttf;
+    application/x-woff                    woff;
+
     application/octet-stream              bin exe dll;
     application/octet-stream              deb;
     application/octet-stream              dmg;
-    application/octet-stream              eot;
+#    application/octet-stream              eot;
     application/octet-stream              iso img;
     application/octet-stream              msi msp msm;
 
