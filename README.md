@@ -75,8 +75,8 @@
    2. **Clean URL** support.
 
    3. Access control for `cron.php`. It can only be requested from a
-   set of IPs addresses you specify. This is for the *non drush
-   aware* version.
+   set of IPs addresses you specify. This is for the **non drush
+   aware** version.
 
    4. Support for the [Boost](http://drupal.org/project/boost) module.
 
@@ -111,7 +111,7 @@
       for `install.php` and other Drupal sensitive files. The
       configuration expects a password file named `.htpasswd-users` in
       the top nginx configuration directory, usually `/etc/nginx`. I
-      provide an empty file. This is also for the *non drush aware*
+      provide an empty file. This is also for the **non drush aware**
       version.
 
       If you're on Debian or any of its derivatives like Ubuntu you
