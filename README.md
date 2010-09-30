@@ -64,7 +64,7 @@
       `/path/to/drush.php`.
       
 
-** General Features
+## General Features
 
    1. The use of two `server` directives to do the domain name
    rewriting, usually redirecting `www.example.com` to `example.com`
@@ -104,7 +104,7 @@
 ## Security Features
 
    1. The use of a `default` configuration file to block all illegal
-   `Host` HTTP header requests.
+      `Host` HTTP header requests.
 
    2. Access control using
       [HTTP Basic Auth](http://wiki.nginx.org/NginxHttpAuthBasicModule)
@@ -139,17 +139,17 @@
       UNIX `file` utility or the PHP `Fileinfo` extension and upload a
       fake jpeg:
    
-         `echo -e "\xff\xd8\xff\xe0\n<?php echo 'hello'; ?>" > test.jpg`
+         echo -e "\xff\xd8\xff\xe0\n<?php echo 'hello'; ?>" > test.jpg
       
-   If you run `php test.jpg`  you get 'hello'. The fact is that **all
-   files** with php extension are either matched by a particular
-   location, as is the case for `index.php`, `xmlrpc.php`,
-   `update.php` and `install.php` or match the last directive of
-   the configuration:
+      If you run `php test.jpg`  you get 'hello'. The fact is that **all
+      files** with php extension are either matched by a particular
+      location, as is the case for `index.php`, `xmlrpc.php`,
+      `update.php` and `install.php` or match the last directive of
+      the configuration:
 
-       location ~* ^.+\.php$ {
-         return 404; 
-       }
+          location ~* ^.+\.php$ {
+            return 404; 
+          }
 
     Returning a 404 (Not Found) for every PHP file not matched by
     all the previous locations.
