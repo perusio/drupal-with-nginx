@@ -139,7 +139,7 @@
       UNIX `file` utility or the PHP `Fileinfo` extension and upload a
       fake jpeg:
    
-         echo -e "\xff\xd8\xff\xe0\n<?php echo 'hello'; ?>" > test.jpg
+          echo -e "\xff\xd8\xff\xe0\n<?php echo 'hello'; ?>" > test.jpg
       
       If you run `php test.jpg`  you get 'hello'. The fact is that **all
       files** with php extension are either matched by a particular
