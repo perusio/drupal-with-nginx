@@ -152,7 +152,7 @@
           }
 
       Returning a 404 (Not Found) for every PHP file not matched by
-      call the previous locations.
+      all the previous locations.
 
 ## Enabling and Disabling Virtual Hosts
 
