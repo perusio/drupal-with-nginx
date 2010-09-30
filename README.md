@@ -151,8 +151,8 @@
             return 404; 
           }
 
-    Returning a 404 (Not Found) for every PHP file not matched by
-    all the previous locations.
+      Returning a 404 (Not Found) for every PHP file not matched by
+      call the previous locations.
 
 ## Enabling and Disabling Virtual Hosts
 
