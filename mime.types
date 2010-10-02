@@ -54,13 +54,11 @@ types {
     application/x-font-ttf                ttf;
     font/opentype                         otf;
     application/vnd.ms-fontobject         eot;
-    #application/octet-stream              otf ttf;
     application/x-woff                    woff;
 
     application/octet-stream              bin exe dll;
     application/octet-stream              deb;
     application/octet-stream              dmg;
-#    application/octet-stream              eot;
     application/octet-stream              iso img;
     application/octet-stream              msi msp msm;
 

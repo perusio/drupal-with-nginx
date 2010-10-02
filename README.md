@@ -123,7 +123,7 @@
 
       You should delete this command from your shell history
       afterwards with `history -d <command number>` or alternatively
-      omit the `-b` switch then you'll be prompted for the password.
+      omit the `-b` switch, then you'll be prompted for the password.
 
       This creates the file (there's a `-c` switch). For adding
       additional users omit the `-c`.
