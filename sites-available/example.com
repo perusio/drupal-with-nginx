@@ -1,5 +1,4 @@
 # -*- mode: conf; mode: flyspell-prog; mode: autopair; ispell-current-dictionary: american -*-
-# -*- mode: conf; mode: flyspell-prog; mode: autopair; ispell-local-dictionary: "american" -*-
 ### Configuration for example.com.
  
 server {
@@ -34,6 +33,9 @@ server {
         # Include all Drupal stuff.
         include sites-available/drupal.conf;
 
+        # For D7. Use this instead.
+        #include sites-available/drupal7.conf;
+        
         # For upload progress to work. From the README of the
         # filefield_nginx_progress module.
         location ~ (.*)/x-progress-id:(\w*) {

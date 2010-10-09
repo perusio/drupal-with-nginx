@@ -62,8 +62,30 @@
       wrapper** that comes with drush not to to the `drush.php`
       script. If using `drush.php` then add `php` in front of the
       `/path/to/drush.php`.
-      
+    
+    
+## Drupal 7
+    
+   The example configuration can be used in a **drupal 7** or **drupal
+   6** site. In drupal 7 there are plenty of new great things. Not only is
+   [image handling](http://drupal.org/node/371374) in core. But also
+   there's no need for a regex with capturing for appending the query
+   string. Therefore the rewrite rule for the `@drupal` location is
+   much simpler.
+  
+   For using the drupal 7 configuration, uncomment out the:
 
+       include sites-available/drupal7.conf;
+
+   line. And comment out:
+
+       include sites-available/drupal.conf;
+
+   Note that you can use the drupal 6 config with drupal 7. But the
+   drupal 7 config is **faster** since there's no regex involved in
+   the rewrite and also there's no need for the drupal 6 imagecache
+   handling rule.
+    
 ## General Features
 
    1. The use of two `server` directives to do the domain name
