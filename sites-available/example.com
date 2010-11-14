@@ -47,13 +47,25 @@ server {
         report_uploads uploads;
     }
     
-} # server HTTP
+} # HTTP server
+
 
 ## HTTPS server.
 server {
     listen [::]:443;
     server_name example.com;
     limit_conn arbeit 10;
+    # Parameterization using hostname of access and log filenames.
+    access_log  /var/log/nginx/example.com_access.log;
+    error_log   /var/log/nginx/example.com_error.log;
+
+    # Include the blacklist.conf file.
+    include sites-available/blacklist.conf;
+
+    # Disable all methods besides HEAD, GET and POST.
+    if ($request_method !~ ^(GET|HEAD|POST)$ ) {
+        return 444;
+    }
 
     ## See the keepalive_timeout directive in nginx.conf.
     ## Server certificate and key.
@@ -69,4 +81,23 @@ server {
     ## whichever age you want.
     add_header Strict-Transport-Security "max-age=7200";
 
-} # server HTTPS
+    root  /var/www/sites/example.com/;
+    index index.php index.html;
+
+    # Include all Drupal stuff.
+    include sites-available/drupal.conf;
+
+    # For D7. Use this instead.
+    #include sites-available/drupal7.conf;
+    
+    # For upload progress to work. From the README of the
+    # filefield_nginx_progress module.
+    location ~ (.*)/x-progress-id:(\w*) {
+        rewrite ^(.*)/x-progress-id:(\w*)  $1?X-Progress-ID=$2;
+    }
+
+    location ^~ /progress {
+        report_uploads uploads;
+    }
+
+} # HTTPS server
