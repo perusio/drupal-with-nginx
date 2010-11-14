@@ -72,7 +72,7 @@ server {
     ssl_certificate /etc/ssl/certs/example-cert.pem;
     ssl_certificate_key /etc/ssl/private/example.key;
     
-    ## Use a SSL/TLS cache for renegotiation.
+    ## Use a SSL/TLS cache for SSL session resume.
     ssl_session_cache    shared:SSL:10m;
     ssl_session_timeout  10m;
 
