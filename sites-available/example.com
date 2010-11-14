@@ -73,15 +73,15 @@ server {
     ssl_certificate_key /etc/ssl/private/example.key;
     
     ## Use a SSL/TLS cache for SSL session resume.
-    ssl_session_cache    shared:SSL:10m;
-    ssl_session_timeout  10m;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
 
     ## Strict Transport Security header for enhanced security. See
     ## http://www.chromium.org/sts. I've set it to 2 hours; set it to
     ## whichever age you want.
     add_header Strict-Transport-Security "max-age=7200";
 
-    root  /var/www/sites/example.com/;
+    root /var/www/sites/example.com/;
     index index.php index.html;
 
     # Include all Drupal stuff.
