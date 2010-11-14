@@ -63,7 +63,6 @@
       script. If using `drush.php` then add `php` in front of the
       `/path/to/drush.php`.
     
-    
 ## Drupal 7
     
    The example configuration can be used in a **drupal 7** or **drupal
@@ -122,7 +121,21 @@
    [init script](github.com/perusio/php-fastcgi-debian-script) that I
    make available here on github that launches the PHP FastCGI daemon
    and spawns new instances as required.
+   
+## Secure HTTP aka SSL/TLS support
 
+   1. By default and since version
+      [0.8.21](http://nginx.org/en/docs/http/configuring_https_servers.html
+      "Nginx SSL/TLS protocol supported defaults") only SSLv3 and
+      TLSv1 are supported. The anonymous Diffie-Hellman (ADH) key
+      exchange and MD5 message autentication algorithms are not
+      supported. They can be enabled explicitly but due to their
+      **insecure** nature they're discouraged. The same goes for
+      SSLv2.
+      
+   2. SSL/TLS shared cache for SSL session resume support of 10
+      MB. SSL session timeout is set to 10 minutes.
+       
 ## Security Features
 
    1. The use of a `default` configuration file to block all illegal
@@ -175,6 +188,13 @@
 
       Returning a 404 (Not Found) for every PHP file not matched by
       all the previous locations.
+
+    5. Use of [Strict Transport Security](http://www.chromium.org/sts
+       "STS at chromium.org") for enhanced security. It forces during
+       the specified period for the configured domain to be contacted
+       only over HTTPS. Requires a modern browser to be of use, i.e.,
+       **Chrome/Chromium**, **Firefox 4** or **Firefox with
+       NoScript**.
 
 ## Enabling and Disabling Virtual Hosts
 
