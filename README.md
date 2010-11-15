@@ -189,12 +189,12 @@
       Returning a 404 (Not Found) for every PHP file not matched by
       all the previous locations.
 
-    5. Use of [Strict Transport Security](http://www.chromium.org/sts
-       "STS at chromium.org") for enhanced security. It forces during
-       the specified period for the configured domain to be contacted
-       only over HTTPS. Requires a modern browser to be of use, i.e.,
-       **Chrome/Chromium**, **Firefox 4** or **Firefox with
-       NoScript**.
+   5. Use of [Strict Transport Security](http://www.chromium.org/sts
+      "STS at chromium.org") for enhanced security. It forces during
+      the specified period for the configured domain to be contacted
+      only over HTTPS. Requires a modern browser to be of use, i.e.,
+      **Chrome/Chromium**, **Firefox 4** or **Firefox with
+      NoScript**.
 
 ## Enabling and Disabling Virtual Hosts
 
