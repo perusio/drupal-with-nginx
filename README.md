@@ -82,9 +82,11 @@
 
    Note that you can use the drupal 6 config with drupal 7. But the
    drupal 7 config is **faster** since there's no regex involved in
-   the rewrite and also there's no need for the drupal 6 imagecache
-   handling rule.
-    
+   the rewrite and also the location where imagecache files are stored
+   has changed in drupal 7. The drupal 6 configuration has no support
+   for the new location. So they're interchangable only if **don't use**
+   imagecache.
+       
 ## General Features
 
    1. The use of two `server` directives to do the domain name
