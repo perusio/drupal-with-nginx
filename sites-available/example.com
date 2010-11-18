@@ -6,7 +6,7 @@ server {
     ## This is to avoid the spurious if for sub-domain name
     ## rewriting. See http://wiki.nginx.org/Pitfalls#Server_Name.
     server_name www.example.com;
-    rewrite ^ $scheme://example.com$request_uri permanent;
+    rewrite ^ $scheme://example.com$request_uri? permanent;
 } # server domain rewrite.
 
 
