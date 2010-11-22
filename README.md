@@ -151,6 +151,12 @@
       given IP address (server). Therefore the default server setting
       is **required**.
        
+      Another option, the one I've chosen here, is to move the
+      `ssl_session_cache` directive to the http context setting. Of
+      course the downside of this approach is that the
+      `ssl_session_cache` settings are the same for **all** configured
+      virtual hosts.
+      
 ## Security Features
 
    1. The use of a `default` configuration file to block all illegal
