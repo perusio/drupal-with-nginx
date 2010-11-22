@@ -137,6 +137,19 @@
       
    2. SSL/TLS shared cache for SSL session resume support of 10
       MB. SSL session timeout is set to 10 minutes.
+      
+   3. Note that for session resumption to work the setting of the SSL
+      socket as default, at least, is required. Meaning a listen
+      directive like this:
+      
+      `listen [::]:443 ssl default_server;`
+      
+      This is so because session resumption takes place before any TLS
+      extension is enabled, namely
+      [Server Name Indication](http://en.wikipedia.org/wiki/Server_Name_Indication
+      "SNI"). The ClientHello message requests a session ID from a
+      given IP address (server). Therefore the default server setting
+      is **required**.
        
 ## Security Features
 

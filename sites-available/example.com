@@ -52,7 +52,7 @@ server {
 
 ## HTTPS server.
 server {
-    listen [::]:443;
+    listen [::]:443 ssl default_server;
     server_name example.com;
     limit_conn arbeit 10;
     # Parameterization using hostname of access and log filenames.
