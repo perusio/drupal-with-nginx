@@ -16,7 +16,10 @@ server {
     server_name example.com;
     limit_conn arbeit 10;
 
-    # Parameterization using hostname of access and log filenames.
+    ## Keep alive timeout set to a greater value for SSL/TLS.
+    keepalive_timeout 75 75;
+
+    ## Access and error logs.
     access_log  /var/log/nginx/example.com_access.log;
     error_log   /var/log/nginx/example.com_error.log;
 
