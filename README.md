@@ -152,7 +152,7 @@
       is **required**.
        
       Another option, the one I've chosen here, is to move the
-      `ssl_session_cache` directive to the http context setting. Of
+      `ssl_session_cache` directive to the `http` context setting. Of
       course the downside of this approach is that the
       `ssl_session_cache` settings are the same for **all** configured
       virtual hosts.
@@ -217,11 +217,61 @@
       **Chrome/Chromium**, **Firefox 4** or **Firefox with
       NoScript**.
 
+## Installation
+
+   1. Move the old `/etc/nginx` directory to `/etc/nginx.old`.
+   
+   2. Clone the git repository from github:
+   
+      `git clone https://github.com/perusio/drupal-with-nginx.git`
+   
+   3. Edit the `sites-available/example.com` configuration file to
+      suit your requirements. Namely replacing example.com with
+      **your** domain.
+   
+   4. Setup the PHP handling method. It can be:
+   
+      + Upstream HTTP server like Apache with mod_php
+      
+      + FastCGI process using php-cgi. In this case an
+        [init script](github.com/perusio/php-fastcgi-debian-script) is
+        required. This is how the server is configured out of the
+        box. It uses UNIX sockets. You can use TCP sockets if you prefer.
+      
+      + [PHP FPM](http://www.php-fpm.org "PHP FPM"), this requires you
+        to configure your fpm setup, in Debian/Ubuntu this is done in
+        the `/etc/php5/fpm` directory.
+        
+      Check that the socket is properly created and is listening. This
+      can be done with `netstat`, like this for UNIX sockets:
+      
+        `netstat --unix -l`
+      
+      or like this for TCP sockets:
+      
+        `netstat -t -l`
+   
+      It should display the PHP CGI socket.
+   
+   5. Enable the virtual host using one of the methods described
+      below.
+    
+   6. Reload Nginx:
+   
+      `/etc/init.d/nginx reload`
+   
+   7. Done.
+   
 ## Enabling and Disabling Virtual Hosts
 
    I've created a shell script
    [nginx_ensite](http://github.com/perusio/nginx_ensite) that lives
    here on github for quick enabling and disabling of virtual hosts.
+   
+   If you're not using that script then you have to **manually**
+   create the symlinks from `sites-enabled` to `sites-available`. Only
+   the virtual host configured in `sites-enabled` will be available
+   for Nginx to serve.
 
 ## On groups.drupal.org
 
@@ -243,3 +293,10 @@
    nginx. On Debian and any of its derivatives you can also test the
    configuration by invoking the init script as: `/etc/init.d/nginx
    testconfig`.
+
+## Acknowledgments
+
+   The great bunch at the [Nginx](http://groups.drupal.org/nginx
+   "Nginx Drupal group") group on groups.drupal.org. They've helped me
+   sort out the snafus on this config and offered insights on how to
+   improve it.

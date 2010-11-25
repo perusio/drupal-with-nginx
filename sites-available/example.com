@@ -23,10 +23,10 @@ server {
     access_log  /var/log/nginx/example.com_access.log;
     error_log   /var/log/nginx/example.com_error.log;
 
-    # Include the blacklist.conf file.
+    ## Include the blacklist.conf file.
     include sites-available/blacklist.conf;
 
-    # Disable all methods besides HEAD, GET and POST.
+    ## Disable all methods besides HEAD, GET and POST.
     if ($request_method !~ ^(GET|HEAD|POST)$ ) {
         return 444;
     }
@@ -34,14 +34,14 @@ server {
     root  /var/www/sites/example.com/;
     index index.php index.html;
 
-    # Include all Drupal stuff.
+    ## Include all Drupal stuff.
     include sites-available/drupal.conf;
 
-    # For D7. Use this instead.
+    ## For D7. Use this instead.
     #include sites-available/drupal7.conf;
     
-    # For upload progress to work. From the README of the
-    # filefield_nginx_progress module.
+    ## For upload progress to work. From the README of the
+    ## filefield_nginx_progress module.
     location ~ (.*)/x-progress-id:(\w*) {
         rewrite ^(.*)/x-progress-id:(\w*)  $1?X-Progress-ID=$2;
     }
@@ -58,14 +58,15 @@ server {
     listen [::]:443 ssl;
     server_name example.com;
     limit_conn arbeit 10;
-    # Parameterization using hostname of access and log filenames.
+
+    ## Access and error logs.
     access_log  /var/log/nginx/example.com_access.log;
     error_log   /var/log/nginx/example.com_error.log;
 
-    # Include the blacklist.conf file.
+    ## Include the blacklist.conf file.
     include sites-available/blacklist.conf;
 
-    # Disable all methods besides HEAD, GET and POST.
+    ## Disable all methods besides HEAD, GET and POST.
     if ($request_method !~ ^(GET|HEAD|POST)$ ) {
         return 444;
     }
@@ -83,14 +84,14 @@ server {
     root /var/www/sites/example.com/;
     index index.php index.html;
 
-    # Include all Drupal stuff.
+    ## Include all Drupal stuff.
     include sites-available/drupal.conf;
 
-    # For D7. Use this instead.
+    ## For D7. Use this instead.
     #include sites-available/drupal7.conf;
     
-    # For upload progress to work. From the README of the
-    # filefield_nginx_progress module.
+    ## For upload progress to work. From the README of the
+    ## filefield_nginx_progress module.
     location ~ (.*)/x-progress-id:(\w*) {
         rewrite ^(.*)/x-progress-id:(\w*)  $1?X-Progress-ID=$2;
     }
