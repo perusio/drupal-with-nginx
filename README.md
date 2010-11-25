@@ -253,8 +253,8 @@
    
       It should display the PHP CGI socket.
    
-   5. Enable the virtual host using one of the methods described
-      below.
+   5. Create the `/etc/nginx/sites-enabled` directory and enable the
+      virtual host using one of the methods described below.
     
    6. Reload Nginx:
    
