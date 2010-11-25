@@ -270,7 +270,7 @@
    
    If you're not using that script then you have to **manually**
    create the symlinks from `sites-enabled` to `sites-available`. Only
-   the virtual host configured in `sites-enabled` will be available
+   the virtual hosts configured in `sites-enabled` will be available
    for Nginx to serve.
 
 ## On groups.drupal.org
