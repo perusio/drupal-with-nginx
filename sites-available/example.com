@@ -16,9 +16,6 @@ server {
     server_name example.com;
     limit_conn arbeit 10;
 
-    ## Keep alive timeout set to a greater value for SSL/TLS.
-    keepalive_timeout 75 75;
-
     ## Access and error logs.
     access_log  /var/log/nginx/example.com_access.log;
     error_log   /var/log/nginx/example.com_error.log;
@@ -63,6 +60,9 @@ server {
     access_log  /var/log/nginx/example.com_access.log;
     error_log   /var/log/nginx/example.com_error.log;
 
+    ## Keep alive timeout set to a greater value for SSL/TLS.
+    keepalive_timeout 75 75;
+    
     ## Include the blacklist.conf file.
     include sites-available/blacklist.conf;
 
