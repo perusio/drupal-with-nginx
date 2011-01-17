@@ -115,14 +115,16 @@
       rewrites that need to use URI components.
 
    9. IPv6 and IPv4 support.
-
-   10. Use of UNIX sockets in `/tmp/` subdirectory with permissions
-       **700**, i.e., accessible only to the user running the process.
    
+   10. Support for **private file** serving in drupal.
+
+   11. Use of UNIX sockets in `/tmp/` subdirectory with permissions
+       **700**, i.e., accessible only to the user running the process.
    You may consider the
    [init script](github.com/perusio/php-fastcgi-debian-script) that I
    make available here on github that launches the PHP FastCGI daemon
    and spawns new instances as required.
+  
    
 ## Secure HTTP aka SSL/TLS support
 
@@ -217,6 +219,26 @@
       **Chrome/Chromium**, **Firefox 4** or **Firefox with
       NoScript**.
 
+## Private file handling
+
+   This config assumes that **private** files are stored under a directory
+   named `private`. I suggest `sites/default/files/private` or
+   `sites/<sitename>/files/private` but can be anywhere inside the site
+   root as long as you keep the top level directory name `private`. If
+   you want to have a different name for the top level then replace in
+   the location `~* private` in `drupal.conf` and/or `drupal7.conf`
+   the name of your private files top directory.
+
+   Example: Calling the top level private files directory `protected`
+   instead of `private`.
+       
+       location ~* protected {
+         internal;
+       }
+  
+   Now any attempt to access the files under this directory directly
+   will return a 404.
+
 ## Installation
 
    1. Move the old `/etc/nginx` directory to `/etc/nginx.old`.
@@ -234,7 +256,8 @@
       + Upstream HTTP server like Apache with mod_php
       
       + FastCGI process using php-cgi. In this case an
-        [init script](github.com/perusio/php-fastcgi-debian-script) is
+        [init script](https://github.com/perusio/php-fastcgi-debian-script
+        "Init script for php-cgi") is
         required. This is how the server is configured out of the
         box. It uses UNIX sockets. You can use TCP sockets if you prefer.
       
