@@ -112,7 +112,7 @@
       module for the upload progress bar.
 
    8. Use of **non-capturing** regex for all directives that are not
-      rewrites that need to use URI components.
+      rewrites that need to use URI components.1
 
    9. IPv6 and IPv4 support.
    
@@ -269,9 +269,7 @@
       can be done with `netstat`, like this for UNIX sockets:
       
         `netstat --unix -l`
-      
-      or like this for TCP sockets:
-      
+         
         `netstat -t -l`
    
       It should display the PHP CGI socket.
@@ -283,7 +281,11 @@
    
       `/etc/init.d/nginx reload`
    
-   7. Done.
+   7. Check that your site is working using your browser.
+   
+   8. Remove the `/etc/nginx.old` directory.
+   
+   9. Done.
    
 ## Enabling and Disabling Virtual Hosts
 
