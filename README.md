@@ -344,3 +344,10 @@
    "Nginx Drupal group") group on groups.drupal.org. They've helped me
    sort out the snafus on this config and offered insights on how to
    improve it.
+
+## My other nginx configs on github
+
+   + [Chive](https://github.com/perusio/chive-nginx "Chive Nginx
+     config")
+     
+   + [Piwik](https://github.com/perusio/piwik-nginx "Piwik Nginx config")
