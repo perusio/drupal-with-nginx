@@ -347,7 +347,11 @@
 
 ## My other nginx configs on github
 
+   + [WordPress]((https://github.com/perusio/wordpress-nginx "WordPress Nginx
+     config")
+
    + [Chive](https://github.com/perusio/chive-nginx "Chive Nginx
      config")
      
    + [Piwik](https://github.com/perusio/piwik-nginx "Piwik Nginx config")
+
