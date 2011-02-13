@@ -129,10 +129,10 @@
        "Expensive 404s issue") that Drupal usually handles when
        using Apache with the default `.htaccess`.
   
-   13. Possibility of using Apache as a backend for dealing with
+   13. Possibility of using **Apache** as a backend for dealing with
        PHP. Meaning using Nginx as
        [reverse proxy](http://wiki.nginx.org/HttpProxyModule "Nginx
-       Proxy Module")
+       Proxy Module").
    
    
 ## Secure HTTP aka SSL/TLS support
