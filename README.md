@@ -248,6 +248,19 @@
    Now any attempt to access the files under this directory directly
    will return a 404.
 
+   Note that this practice it's not what's usually
+   [recommended](http://drupal.org/node/344806 "Drupal handbook page
+   on private files"). The _usual_ practice involves setting up a
+   directory outside of the web root and giving write permissions to
+   the web server user. While that might be a simple alternative in
+   the sense that doesn't require to tweak the web server
+   configuration, I think it to be less advisable, in the sense that
+   now there's **another** directory that is writable by the server. 
+   
+   I prefer to use a directory under `files`, which is the only one
+   that is writable by the web server, and use the above location
+   (`protected` or `private`) to block access by the client to it.
+   
 
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
 
