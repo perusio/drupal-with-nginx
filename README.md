@@ -259,7 +259,8 @@
    
    I prefer to use a directory under `files`, which is the only one
    that is writable by the web server, and use the above location
-   (`protected` or `private`) to block access by the client to it.
+   (
+   `protected` or `private`) to block access by the client to it.
    
 
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
@@ -298,6 +299,10 @@
         assumes the loopback `127.0.0.1` interface on port
         `8080`. Adjust accordingly to reflect your setup.
 
+        **All** the `fastcgi_pass` directives in either
+        `drupal_boost.conf` or `drupal_boost_drush.conf`, depending
+        which config layout you're using, must have the
+        value `phpapache` instead of `phpcgi`.
       
       + FastCGI process using php-cgi. In this case an
         [init script](https://github.com/perusio/php-fastcgi-debian-script
