@@ -12,7 +12,7 @@
    the HTTP server. 
 
    Instead nginx uses [FastCGI](http://en.wikipedia.org/wiki/FastCGI)
-   proxy all requests for PHP processing to a php fastcgi daemon that
+   to proxy all requests for PHP processing to a php fastcgi daemon that
    is waiting for incoming requests and then handles the php file
    being requested.
 
