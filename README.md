@@ -299,10 +299,11 @@
         assumes the loopback `127.0.0.1` interface on port
         `8080`. Adjust accordingly to reflect your setup.
 
-        **All** the `fastcgi_pass` directives in either
+        Comment out **all**  `fastcgi_pass` directives in either
         `drupal_boost.conf` or `drupal_boost_drush.conf`, depending
-        which config layout you're using, must have the
-        value `phpapache` instead of `phpcgi`.
+        which config layout you're using. Uncomment out all the
+        `proxy_pass` directives. They have a comment around them,
+        stating these instructions.
       
       + FastCGI process using php-cgi. In this case an
         [init script](https://github.com/perusio/php-fastcgi-debian-script
@@ -398,6 +399,7 @@
    "Nginx Drupal group") group on groups.drupal.org. They've helped me
    sort out the snafus on this config and offered insights on how to
    improve it.
+
 
 ## My other nginx configs on github
 
