@@ -14,7 +14,7 @@ server {
 server {
     listen [::]:80;
     server_name example.com;
-    limit_conn arbeit 10;
+    limit_conn arbeit 16;
 
     ## Access and error logs.
     access_log  /var/log/nginx/example.com_access.log;
