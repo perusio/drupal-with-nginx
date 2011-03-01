@@ -227,6 +227,10 @@
       only over HTTPS. Requires a modern browser to be of use, i.e.,
       **Chrome/Chromium**, **Firefox 4** or **Firefox with
       NoScript**.
+      
+   6. DDoS prevention with a _low_ number of connections by client
+      allowed: **16**. This number can be adjusted as you see fit.
+   
 
 ## Private file handling
 
@@ -251,7 +255,7 @@
    Note that this practice it's not what's usually
    [recommended](http://drupal.org/node/344806 "Drupal handbook page
    on private files"). The _usual_ practice involves setting up a
-   directory outside of the web root and giving write permissions to
+   directory outside of files directory and giving write permissions to
    the web server user. While that might be a simple alternative in
    the sense that doesn't require to tweak the web server
    configuration, I think it to be less advisable, in the sense that
@@ -259,9 +263,38 @@
    
    I prefer to use a directory under `files`, which is the only one
    that is writable by the web server, and use the above location
-   (
-   `protected` or `private`) to block access by the client to it.
+   (`protected` or `private`) to block access by the client to it.
    
+## Fast Private File Transfer
+
+   Nginx implements
+   [Lighty X-Sendfile](http://blog.lighttpd.net/articles/2006/07/02/x-sendfile
+   "Lighty's life blog post on X-Sendfile") using the header:
+   [X-Accel-Redirect](http://wiki.nginx.org/XSendfile "Nginx
+   implementation of X-Sendfile").
+   
+   This allows **fast** private file transfers. I've developed a
+   module tailored for Nginx:
+   [nginx\_accel\_redirect](https://github.com/perusio/drupal-nginx-fast-x-accel-redirect
+   "Module for Drupal providing fast private file transfer"). 
+
+
+## Connections per client and DDoS Mitigation
+
+   The **connection zone** defined, called `arbeit` allows for
+   **16** connections to be established for each client. That seems
+   to me to be a _reasonable_ number. It could happen that you have a
+   setup with lots of CDNs (see this
+   [issue](https://github.com/perusio/drupal-with-nginx/issues#issue/2))    
+   or extensive
+   [domain sharding](http://www.stevesouders.com/blog/2009/05/12/sharding-dominant-domains/)
+   and the number of allowed connections by client can be greater than
+   16, specially when using Nginx as a reverse proxy. It may happen
+   that 16 is not enough and you start getting a lot of `503 Service
+   Unavailable` status codes as a reply from the server. In that case
+   tweak the value of `limit_conn` until you have a working
+   setup. This number must be as small as possible as a way to
+   mitigate the potential for DDoS attacks. 
 
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
 
@@ -287,8 +320,7 @@
    4. Setup the PHP handling method. It can be:
    
       + Upstream HTTP server like Apache with mod_php. To use this
-        method comment out the 
-          `include upstream_phpcgi.conf;`
+        method comment out the `include upstream_phpcgi.conf;`
         line in `nginx.conf` and uncomment the lines:
         
             include reverse_proxy.conf;
@@ -371,6 +403,31 @@
    the faintest idea which release to advise. So you're on your
    own. Generally the APT machinery will sort out for you any
    dependencies issues that might exist.
+
+## Ad and Aditional modules support
+
+   The config is quite tight in the sense that if you have something
+   that is not contemplated in the **exact** match locations,
+   `/index.php`, `/install.php`, etc, and you try to make it work it
+   will fail. Some Drupal modules like
+   [ad](http://drupal.org/project/ad "Ad module") provide a PHP
+   script. This script needs to be invoked. In the case of the **ad
+   module** you must add the following location block:
+   
+       location = /sites/all/modules/ad/serve.php {
+          fastcgi_pass phpcgi;
+        }
+   
+   Of course this assumes that you installed the ad module such that
+   is usable for all sites. To make it usable when targeting a single
+   site, e.g., `mysite.com`, insert instead:
+       
+       location = /sites/mysite.com/modules/ad/serve.php {
+          fastcgi_pass phpcgi;
+       }   
+       
+    Proceed similarly for other modules requiring the usage of PHP
+    scripts like `ad`.   
 
 ## On groups.drupal.org
 
