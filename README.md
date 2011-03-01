@@ -281,20 +281,21 @@
 
 ## Connections per client and DoS Mitigation
 
-   The **connection zone** defined, called `arbeit` allows for
-   **16** connections to be established for each client. That seems
-   to me to be a _reasonable_ number. It could happen that you have a
-   setup with lots of CDNs (see this
-   [issue](https://github.com/perusio/drupal-with-nginx/issues#issue/2))    
+   The **connection zone** defined, called `arbeit` allows for **16**
+   connections to be established for each client. That seems to me to
+   be a _reasonable_ number. It could happen that you have a setup
+   with lots of CDNs (see this
+   [issue](https://github.com/perusio/drupal-with-nginx/issues#issue/2))
    or extensive
    [domain sharding](http://www.stevesouders.com/blog/2009/05/12/sharding-dominant-domains/)
    and the number of allowed connections by client can be greater than
-   16, specially when using Nginx as a reverse proxy. It may happen
-   that 16 is not enough and you start getting a lot of `503 Service
-   Unavailable` status codes as a reply from the server. In that case
-   tweak the value of `limit_conn` until you have a working
-   setup. This number must be as small as possible as a way to
-   mitigate the potential for DoS attacks. 
+   16, specially when using Nginx as a reverse proxy. 
+   
+   It may happen that 16 is not enough and you start getting a lot of
+   `503 Service Unavailable` status codes as a reply from the
+   server. In that case tweak the value of `limit_conn` until you have
+   a working setup. This number must be as small as possible as a way
+   to mitigate the potential for DoS attacks.
 
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
 
