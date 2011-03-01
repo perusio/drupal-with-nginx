@@ -228,7 +228,7 @@
       **Chrome/Chromium**, **Firefox 4** or **Firefox with
       NoScript**.
       
-   6. DDoS prevention with a _low_ number of connections by client
+   6. DoS prevention with a _low_ number of connections by client
       allowed: **16**. This number can be adjusted as you see fit.
    
 
@@ -279,7 +279,7 @@
    "Module for Drupal providing fast private file transfer"). 
 
 
-## Connections per client and DDoS Mitigation
+## Connections per client and DoS Mitigation
 
    The **connection zone** defined, called `arbeit` allows for
    **16** connections to be established for each client. That seems
@@ -294,7 +294,7 @@
    Unavailable` status codes as a reply from the server. In that case
    tweak the value of `limit_conn` until you have a working
    setup. This number must be as small as possible as a way to
-   mitigate the potential for DDoS attacks. 
+   mitigate the potential for DoS attacks. 
 
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
 
