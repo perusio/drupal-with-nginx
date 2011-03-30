@@ -386,6 +386,26 @@
    the virtual hosts configured in `sites-enabled` will be available
    for Nginx to serve.
 
+
+## Acessing the php-fpm status and ping pages
+
+   You can get the
+   [status and a ping](http://forum.nginx.org/read.php?3,56426) pages
+   for the running instance of `php-fpm`. There's a
+   `php_fpm_status.conf` file with the configuration for both
+   features.
+   
+     + the **status page** at `/fpm-status`;
+     
+     + the **ping page** at `/ping`.
+
+    For obvious reasons these pages are acessed only from a given set
+    of IP addresses. In the suggested configuration only from
+    localhost and non-routable IPs of the 192.168.1.0 network.
+    
+    To enable the status and ping pages uncomment the line in the
+    `example.com` virtual host configuration file.
+
 ## Getting the latest Nginx packaged for Debian or Ubuntu
 
    I maintain a [debian repository](http://debian.perusio.net/unstable

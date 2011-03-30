@@ -44,9 +44,13 @@ server {
     }
 
     location ^~ /progress {
-        report_uploads uploads;
+        report_uploads uploads;b
     }
-    
+
+    ## Including the php-fpm status and ping pages config.
+    ## Uncomment to enable if you're running php-fpm.
+    #include php_fpm_status.conf;
+
 } # HTTP server
 
 
@@ -99,5 +103,8 @@ server {
     location ^~ /progress {
         report_uploads uploads;
     }
+
+    ## Including the php-fpm status and ping pages config.
+    include php_fpm_status.conf;
 
 } # HTTPS server
