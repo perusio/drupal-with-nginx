@@ -105,6 +105,7 @@ server {
     }
 
     ## Including the php-fpm status and ping pages config.
-    include php_fpm_status.conf;
+    ## Uncomment to enable if you're running php-fpm.
+    #include php_fpm_status.conf;
 
 } # HTTPS server
