@@ -359,7 +359,7 @@
    
       Note that the default socket type is UNIX and the config assumes
       it to be listening on `unix:/tmp/php-cgi/php-cgi.socket`, if
-      using the `php-cgi`, or in `unix:/var/run/fpm.sock` using
+      using the `php-cgi`, or in `unix:/var/run/php-fpm.sock` using
       `php-fpm` and that you should **change** to reflect your setup
       by editing `upstream_phpcgi.conf`.
    
