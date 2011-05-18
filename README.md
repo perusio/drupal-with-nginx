@@ -306,6 +306,28 @@
    much faster than Apache. Furthermore you can use the proxy cache
    and/or use Nginx as a load balancer. 
 
+## Static index.html file
+
+   The `/` location is a **_fallback_** location, meaning that after
+   trying all other, more specific locations, Nginx, will return here.
+   
+   Since there's a `try_files $uri` directive with `@cache` as
+   fallback it will return a 404 if no file is found. Even if you have
+   an `index.html` file at the root. That is for a request URI of
+   `/`. It will work however with `/index.html`, since that's the
+   argument of the `try_files` directive.
+   
+   There's several possible ways to fix that. Be with nested locations
+   inside `location /` or with an aditional `try_files $uri/index.html`.
+   
+   The one I opted for is instead making use of the
+   [`error_page`](http://wiki.nginx.org/HttpCoreModule#error_page)
+   directive. There's an exact location `/` that issues a
+   200 code and serves `/index.html` when a 404 is returned.
+   
+   This configuration block is in the file
+   `sites-available/static_index.html`.
+   
 ## Installation
 
    1. Move the old `/etc/nginx` directory to `/etc/nginx.old`.
@@ -362,6 +384,7 @@
       using the `php-cgi`, or in `unix:/var/run/php-fpm.sock` using
       `php-fpm` and that you should **change** to reflect your setup
       by editing `upstream_phpcgi.conf`.
+   
    
    5. Create the `/etc/nginx/sites-enabled` directory and enable the
       virtual host using one of the methods described below.
