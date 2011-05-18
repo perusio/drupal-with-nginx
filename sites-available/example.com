@@ -28,9 +28,12 @@ server {
         return 444;
     }
 
-    root  /var/www/sites/example.com/;
-    index index.php index.html;
+    ## Filesystem root of the site.
+    root  /var/www/sites/example.com;
 
+    ## Use a static index file if available.
+    include sites-available/static_index.conf;
+    
     ## Include all Drupal stuff.
     include sites-available/drupal.conf;
 
@@ -44,7 +47,7 @@ server {
     }
 
     location ^~ /progress {
-        report_uploads uploads;b
+        report_uploads uploads;
     }
 
     ## Including the php-fpm status and ping pages config.
