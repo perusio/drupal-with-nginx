@@ -28,9 +28,10 @@ server {
         return 444;
     }
 
-    ## Filesystem root of the site.
-    root  /var/www/sites/example.com;
-
+    ## Filesystem root of the site and index.
+    root /var/www/sites/example.com;
+    index index.php;
+    
     ## Use a static index file if available.
     include sites-available/static_index.conf;
     
