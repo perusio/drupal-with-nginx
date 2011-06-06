@@ -20,26 +20,62 @@ server {
     access_log  /var/log/nginx/example.com_access.log;
     error_log   /var/log/nginx/example.com_error.log;
 
-    ## Include the blacklist.conf file.
-    include sites-available/blacklist.conf;
-
-    ## Disable all methods besides HEAD, GET and POST.
-    if ($request_method !~ ^(GET|HEAD|POST)$ ) {
+    ## See the blacklist.conf file at the parent dir: /etc/nginx.
+    ## Deny access based on the User-Agent header.
+    if ($bad_bot) {
         return 444;
     }
-
+    ## Deny access based on the Referer header.
+    if ($bad_referer) {
+        return 444;
+    }
+    
     ## Filesystem root of the site and index.
     root /var/www/sites/example.com;
     index index.php;
-    
-    ## Use a static index file if available.
-    include sites-available/static_index.conf;
-    
-    ## Include all Drupal stuff.
+
+    ################################################################
+    ### Generic configuration: for most Drupal 6 and Drupal 7 sites.
+    ################################################################
+    ## Include drupal basic config. This configuration is only for
+    ## sites that don't rely on the usage of
+    ## http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
+    ## like http://drupal.org/project/purl and modules that make use
+    ## if it like http://drupal.org/project/spaces,
     include sites-available/drupal.conf;
 
-    ## For D7. Use this instead.
-    #include sites-available/drupal7.conf;
+    ################################################################
+    ### Configuration for sites that use
+    ### http://drupal.org/project/purl or rely on custom URL rewrites
+    ### implemented on modules via
+    ### http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
+    ### This is suitable for OpenAtrium (http://openatrium.com) or
+    ### Managing News (http://managingnews.com).
+    ################################################################
+    #include sites-available/drupal_spaces.conf;
+
+    #################################################################
+    ### No Boost: Use one of the configs below if you're not using
+    ### Boost.
+    #################################################################
+    ## Include drush no Boost support config. It uses drush for
+    ## updating the site and running cron.
+    include sites-available/drupal_drush.conf;
+    ## This uses the regular web interface for updates and running
+    ## cron.
+    #include sites-available/drupal_no_drush.conf;
+
+    #################################################################
+    ### Boost: enable the one of the configs below if you're using
+    ### Boost.
+    #################################################################
+    ## Include drush Boost support config. It uses drush for
+    ## updating the site and running cron.
+    #include sites-available/drupal_boost_drush.conf;
+    ## This uses the regular web interface for updates and running
+    ## cron.
+    #include sites-available/drupal_boost_no_drush.conf;
+    
     
     ## For upload progress to work. From the README of the
     ## filefield_nginx_progress module.
@@ -71,9 +107,6 @@ server {
     ## Keep alive timeout set to a greater value for SSL/TLS.
     keepalive_timeout 75 75;
     
-    ## Include the blacklist.conf file.
-    include sites-available/blacklist.conf;
-
     ## Disable all methods besides HEAD, GET and POST.
     if ($request_method !~ ^(GET|HEAD|POST)$ ) {
         return 444;
@@ -89,14 +122,62 @@ server {
     ## whichever age you want.
     add_header Strict-Transport-Security "max-age=7200";
 
-    root /var/www/sites/example.com/;
-    index index.php index.html;
+    root /var/www/sites/example.com;
+    index index.php;
 
-    ## Include all Drupal stuff.
+    ## See the blacklist.conf file at the parent dir: /etc/nginx.
+    ## Deny access based on the User-Agent header.
+    if ($bad_bot) {
+        return 444;
+    }
+    ## Deny access based on the Referer header.
+    if ($bad_referer) {
+        return 444;
+    }
+
+
+    ################################################################
+    ### Generic configuration: for most Drupal 6 and Drupal 7 sites.
+    ################################################################
+    ## Include drupal basic config. This configuration is only for
+    ## sites that don't rely on the usage of
+    ## http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
+    ## like http://drupal.org/project/purl and modules that make use
+    ## if it like http://drupal.org/project/spaces,
     include sites-available/drupal.conf;
 
-    ## For D7. Use this instead.
-    #include sites-available/drupal7.conf;
+    ################################################################
+    ### Configuration for sites that use
+    ### http://drupal.org/project/purl or rely on custom URL rewrites
+    ### implemented on modules via
+    ### http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
+    ### This is suitable for OpenAtrium (http://openatrium.com) or
+    ### Managing News (http://managingnews.com).
+    ################################################################
+    #include sites-available/drupal_spaces.conf;
+
+    #################################################################
+    ### No Boost: Use one of the configs below if you're not using
+    ### Boost.
+    #################################################################
+    ## Include drush no Boost support config. It uses drush for
+    ## updating the site and running cron.
+    include sites-available/drupal_drush.conf;
+    ## This uses the regular web interface for updates and running
+    ## cron.
+    #include sites-available/drupal_no_drush.conf;
+
+    #################################################################
+    ### Boost: enable the one of the configs below if you're using
+    ### Boost.
+    #################################################################
+    ## Include drush Boost support config. It uses drush for
+    ## updating the site and running cron.
+    #include sites-available/drupal_boost_drush.conf;
+    ## This uses the regular web interface for updates and running
+    ## cron.
+    #include sites-available/drupal_boost_no_drush.conf;
+    
     
     ## For upload progress to work. From the README of the
     ## filefield_nginx_progress module.
