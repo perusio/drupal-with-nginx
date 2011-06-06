@@ -37,7 +37,7 @@ server {
     ################################################################
     ### Generic configuration: for most Drupal 6 and Drupal 7 sites.
     ################################################################
-    ## Include drupal basic config. This configuration is only for
+    ## This configuration is only for
     ## sites that don't rely on the usage of
     ## http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
     ## like http://drupal.org/project/purl and modules that make use
@@ -55,27 +55,32 @@ server {
     #include sites-available/drupal_spaces.conf;
 
     #################################################################
-    ### No Boost: Use one of the configs below if you're not using
-    ### Boost.
+    ### Configuration for Drupal sites that use boost.
     #################################################################
-    ## Include drush no Boost support config. It uses drush for
-    ## updating the site and running cron.
-    include sites-available/drupal_drush.conf;
-    ## This uses the regular web interface for updates and running
-    ## cron.
-    #include sites-available/drupal_no_drush.conf;
+    ## This configuration is only for
+    ## sites that don't rely on the usage of
+    ## http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
+    ## like http://drupal.org/project/purl and modules that make use
+    ## if it like http://drupal.org/project/spaces,
+    #include sites-available/drupal_boost.conf;
 
     #################################################################
-    ### Boost: enable the one of the configs below if you're using
-    ### Boost.
+    ### Configuration for Drupal sites using Boost and have installed
+    ### the module http://drupal.org/project/purl or rely on custom
+    ### URL rewrites implemented on modules via
+    ### http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
+    ### This is suitable for OpenAtrium (http://openatrium.com) or
+    ### Managing News (http://managingnews.com).
     #################################################################
-    ## Include drush Boost support config. It uses drush for
-    ## updating the site and running cron.
-    #include sites-available/drupal_boost_drush.conf;
-    ## This uses the regular web interface for updates and running
-    ## cron.
-    #include sites-available/drupal_boost_no_drush.conf;
-    
+    #include sites-available/drupal_spaces_boost.conf;
+
+    #################################################################
+    ### Configuration for updating the site via update.php and running
+    ### cron externally. If you don't use drush for running cron use
+    ### the configuration below.
+    #################################################################
+    #include sites-available/drupal_update_cron.conf;
+ 
     
     ## For upload progress to work. From the README of the
     ## filefield_nginx_progress module.
@@ -135,11 +140,10 @@ server {
         return 444;
     }
 
-
     ################################################################
     ### Generic configuration: for most Drupal 6 and Drupal 7 sites.
     ################################################################
-    ## Include drupal basic config. This configuration is only for
+    ## This configuration is only for
     ## sites that don't rely on the usage of
     ## http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
     ## like http://drupal.org/project/purl and modules that make use
@@ -157,28 +161,32 @@ server {
     #include sites-available/drupal_spaces.conf;
 
     #################################################################
-    ### No Boost: Use one of the configs below if you're not using
-    ### Boost.
+    ### Configuration for Drupal sites that use boost.
     #################################################################
-    ## Include drush no Boost support config. It uses drush for
-    ## updating the site and running cron.
-    include sites-available/drupal_drush.conf;
-    ## This uses the regular web interface for updates and running
-    ## cron.
-    #include sites-available/drupal_no_drush.conf;
+    ## This configuration is only for
+    ## sites that don't rely on the usage of
+    ## http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
+    ## like http://drupal.org/project/purl and modules that make use
+    ## if it like http://drupal.org/project/spaces,
+    #include sites-available/drupal_boost.conf;
 
     #################################################################
-    ### Boost: enable the one of the configs below if you're using
-    ### Boost.
+    ### Configuration for Drupal sites using Boost and have installed
+    ### the module http://drupal.org/project/purl or rely on custom
+    ### URL rewrites implemented on modules via
+    ### http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6
+    ### This is suitable for OpenAtrium (http://openatrium.com) or
+    ### Managing News (http://managingnews.com).
     #################################################################
-    ## Include drush Boost support config. It uses drush for
-    ## updating the site and running cron.
-    #include sites-available/drupal_boost_drush.conf;
-    ## This uses the regular web interface for updates and running
-    ## cron.
-    #include sites-available/drupal_boost_no_drush.conf;
-    
-    
+    #include sites-available/drupal_spaces_boost.conf;
+
+    #################################################################
+    ### Configuration for updating the site via update.php and running
+    ### cron externally. If you don't use drush for running cron use
+    ### the configuration below.
+    #################################################################
+    #include sites-available/drupal_update_cron.conf;
+        
     ## For upload progress to work. From the README of the
     ## filefield_nginx_progress module.
     location ~ (.*)/x-progress-id:(\w*) {
