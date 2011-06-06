@@ -20,24 +20,54 @@
    a greater degree of control over which actions are permitted, hence
    greater security.
 
-   This configuration uses a lot of stuff stolen from both
-   [yhager](github.com/yhager/nginx_drupal),
-   [omega8cc](http://github.com/omega8cc/nginx-for-drupal) and
+   This configuration started life as a fork of
+   [yhager's](github.com/yhager/nginx_drupal) configuration, tempered
+   by [omega8cc](http://github.com/omega8cc/nginx-for-drupal) and
    [Brian Mercer](http://test.brianmercer.com/content/nginx-configuration-drupal)
-   configurations. I've incorporated some tidbits of advice I've
-   gotten from both the nginx mailing list and the
+   configurations. 
+   
+   I've since then changed it substantially. Tried to remove as best
+   as I can the traces of bad habits promoted by Apache's
+   configuration logic. Namely the use of a `.htaccess` and what it
+   entails in terms or _reverse logic_ on the server
+   configuration. I've incorporated tidbits and advices gotten,
+   mostly, from the nginx mailing list and the
    [nginx Wiki](http://wiki.nginx.org).
 
 ## Layout
    
-   The configuration has **two** possible choices.
+   The configuration comes in **two** flavors:
+   
+   1. Regular Drupal configuration for a site not relying on
+     [custom_url_rewrite_outbound](http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6). That's
+      the majority of sites out there. This corresponds to the file
+      `drupal.conf`.
 
-   1. A **non drush aware** version that uses `wget/curl` to run cron
+
+   2. Drupal configuration for a site that makes use of
+     [custom_url_rewrite_outbound](http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6)
+      something that the [purl](http://drupal.org/project/purl) module
+      does and is then used in
+      [spaces](http://drupal.org/project/spaces). Two very popular
+      drupal based projects make use of it:
+      [OpenAtrium](http://openatrium.com) and [ManagingNews](http://managingnews.com).
+    
+     That corresponds to the configuration file `drupal_spaces.conf`.
+      
+     Each of these configurations can make use of
+     [Boost](http://drupal.org/project/boost). With the files being
+      `drupal_boost.conf`, for the regular drupal site, or
+      `drupal_spaces_boost.conf` for sites that use custom URL
+      rewrites, like [OpenAtrium](http://openatrium.com) and [ManagingNews](http://managingnews.com).
+      
+Furthermore there are **two** options for each configuration:
+
+   1. A **non drush aware** option that uses `wget/curl` to run cron
       and updating the site using `update.php`, i.e., via a web
-      interface.
+      interface. 
 
-   2. A **drush aware version** that runs cron and updates the
-      site using [drush](http://drupal.org/project/drush).
+   2. A **drush aware flavor** that runs cron and updates the site
+      using [drush](http://drupal.org/project/drush).
 
       To get drush to run cron jobs the easiest way is to define your
       own [site aliases](http://drupal.org/node/670460). See the
@@ -49,9 +79,10 @@
 
       Your crontab should contain something like:
 
-          COLUMNS 80
-          */50 * * * * /path/to/drush @excom cron > /dev/null
-          1 2 * * * /path/to/drush @exnet cron > /dev/null
+          COLUMNS=80
+          DRUSH=/full/path/to/drush
+          */50 * * * * $DRUSH @excom cron -q
+          1 2 * * * $DRUSH @exnet cron -q
 
       This means that the cron job for example.com will be run every
       50 minutes and the cron job for example.net will be run every
@@ -63,30 +94,36 @@
       script. If using `drush.php` then add `php` in front of the
       `/path/to/drush.php`.
     
-## Drupal 7
+## Configuration Selection algorithm
+
+   1. I'm **not using** spaces or any module that relies in custom URL
+      rewrites. Use the `drupal.conf` config in your vhost (`server`
+      block): `include sites-availables/drupal.conf;`.
+   
+   2. I'm running [OpenAtrium](http://openatrium.com),
+      [ManagingNews](http://managingnews.com) or any other site that
+      **uses** [spaces](http://drupal.org/project/spaces). Use the
+      `drupal_spaces.conf` config in your vhost (`server` block):
+      `include sites-availables/drupal_spaces.conf;`
     
-   The example configuration can be used in a **drupal 7** or **drupal
-   6** site. In drupal 7 there are plenty of new great things. Not only is
-   [image handling](http://drupal.org/node/371374) in core. But also
-   there's no need for a regex with capturing for appending the query
-   string. Therefore the rewrite rule for the `@drupal` location is
-   much simpler.
-  
-   For using the drupal 7 configuration, uncomment out the:
-
-       include sites-available/drupal7.conf;
-
-   line. And comment out:
-
-       include sites-available/drupal.conf;
-
-   Note that you can use the drupal 6 config with drupal 7. But the
-   drupal 7 config is **faster** since there's no regex involved in
-   the rewrite and also the location where imagecache files are stored
-   has changed in drupal 7. The drupal 6 configuration has no support
-   for the new location. So they're interchangable only if **don't use**
-   imagecache.
-       
+   3. I'm using [Boost](http://drupal.org/project/boost) for caching
+      on my drupal site and **not using** spaces or any module that
+      relies in custom URL rewrites. Use the `drupal_boost.conf`
+      config in your vhost (`server` block): `include
+      sites-availables/drupal_boost.conf;`
+      
+   4. I'm using [Boost](http://drupal.org/project/boost) and running
+      [OpenAtrium](http://openatrium.com),
+      [ManagingNews](http://managingnews.com) or any other site that
+      **uses** [spaces](http://drupal.org/project/spaces). Use the
+      `drupal_spaces_boost.conf` config in your vhost (`server`
+      block): `include sites-availables/drupal_spaces_boost.conf;`
+   
+   5. I'm **not using drush** for updating and running
+      cron. Additionally you should also include the
+      `drupal_cron_update.conf` config in your vhost (`server`
+      block): `include sites-availables/drupal_cron_update.conf;`
+      
 ## General Features
 
    1. The use of two `server` directives to do the domain name
@@ -245,7 +282,7 @@
    Example: Calling the top level private files directory `protected`
    instead of `private`.
        
-       location ~* protected {
+       location ~* /files/protected {
          internal;
        }
   
@@ -311,11 +348,13 @@
    The `/` location is a **_fallback_** location, meaning that after
    trying all other, more specific locations, Nginx, will return here.
    
-   Since there's a `try_files $uri` directive with `@cache` as
-   fallback it will return a 404 if no file is found. Even if you have
-   an `index.html` file at the root. That is for a request URI of
-   `/`. It will work however with `/index.html`, since that's the
-   argument of the `try_files` directive.
+   Since there's a `try_files $uri` directive with `@cache`, if using
+   [Boost](http://drupal.org/project/boost), or `@drupal`, or
+   `index.php?q=$uri&$args` otherwise, as fallback it will return a
+   404 if no file is found. Even if you have an `index.html` file at
+   the root. That is for a request URI of `/`. It will work however
+   with `/index.html`, since that's the argument of the `try_files`
+   directive.
    
    There's several possible ways to fix that. Be with nested locations
    inside `location /` or with an aditional `try_files $uri/index.html`.
@@ -324,9 +363,6 @@
    [`error_page`](http://wiki.nginx.org/HttpCoreModule#error_page)
    directive. There's an exact location `/` that issues a
    200 code and serves `/index.html` when a 404 is returned.
-   
-   This configuration block is in the file
-   `sites-available/static_index.html`.
    
 ## Installation
 
@@ -495,14 +531,6 @@
    configuration by invoking the init script as: `/etc/init.d/nginx
    testconfig`.
 
-## Acknowledgments
-
-   The great bunch at the [Nginx](http://groups.drupal.org/nginx
-   "Nginx Drupal group") group on groups.drupal.org. They've helped me
-   sort out the snafus on this config and offered insights on how to
-   improve it.
-
-
 ## My other nginx configs on github
 
    + [WordPress]((https://github.com/perusio/wordpress-nginx "WordPress Nginx
@@ -521,3 +549,18 @@
    
    Grab it [here](https://github.com/perusio/php-ini-cleanup "PHP
    cleanup script").
+
+## TODO
+
+   + Implement the handling of Nginx
+     [memcached](http://wiki.nginx.org/HttpMemcachedModule)  backend.
+     
+   + Implement caching with the use of the
+     [Nginx Cache purge](https://github.com/FRiCKLE/ngx_cache_purge) module.
+
+## Acknowledgments
+
+   The great bunch at the [Nginx](http://groups.drupal.org/nginx
+   "Nginx Drupal group") group on groups.drupal.org. They've helped me
+   sort out the snafus on this config and offered insights on how to
+   improve it.
