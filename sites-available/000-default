@@ -1,4 +1,4 @@
-# -*-mode: nginx; mode: flyspell-prog; mode: autopair; ispell-local-dictionary: "american" -*-
+# -*-mode: nginx; mode: flyspell-prog;  ispell-local-dictionary: "american" -*-
 ### Block all illegal host headers. Taken from a discussion on nginx
 ### forums. Cf. http://forum.nginx.org/read.php?2,3482,3518 following
 ### a suggestion by Maxim Dounin. Also suggested in

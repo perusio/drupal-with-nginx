@@ -1,4 +1,4 @@
-# -*- mode: nginx; mode: flyspell-prog; mode: autopair; ispell-current-dictionary: american -*-
+# -*- mode: nginx; mode: flyspell-prog;  ispell-current-dictionary: american -*-
 ### Configuration for example.com.
 
 ## Rewrite server block.
