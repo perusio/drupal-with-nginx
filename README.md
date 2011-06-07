@@ -268,6 +268,9 @@ Furthermore there are **two** options for each configuration:
    6. DoS prevention with a _low_ number of connections by client
       allowed: **16**. This number can be adjusted as you see fit.
    
+   7. The Drupal specific headers like `X-Drupal-Cache` provided by
+      [pressflow](https://github.com/pressflow/6) or the `X-Generator`
+      header that Drupal 7 sets are both **hidden**. 
 
 ## Private file handling
 
