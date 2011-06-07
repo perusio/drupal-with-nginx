@@ -426,7 +426,13 @@ Furthermore there are **two** options for each configuration:
    
    
    5. Create the `/etc/nginx/sites-enabled` directory and enable the
-      virtual host using one of the methods described below.
+      virtual host using one of the methods described below. 
+      
+      Note that if you're using the
+      [nginx_ensite](http://github.com/perusio/nginx_ensite) script
+      described below it **creates** the `/etc/nginx/sites-enabled`
+      directory if it doesn't exist the first time you run it for
+      enabling a site.
     
    6. Reload Nginx:
    
