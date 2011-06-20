@@ -94,7 +94,7 @@ Furthermore there are **two** options for each configuration:
       script. If using `drush.php` then add `php` in front of the
       `/path/to/drush.php`.
     
-## Configuration Selection algorithm
+## Configuration Selection Algorithm
 
    1. I'm **not using** spaces or any module that relies in custom URL
       rewrites. Use the `drupal.conf` config in your vhost (`server`
@@ -123,7 +123,32 @@ Furthermore there are **two** options for each configuration:
       cron. Additionally you should also include the
       `drupal_cron_update.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_cron_update.conf;`
-      
+
+
+## Drupal 6 Global Redirect and the 0 Rewrites Configuration
+
+There's a setting that is enabled by default in
+[`globalredirect`](http://drupal.org/project/globalredirect) that
+removes the trailing slash in the URIs. That setting creates a
+redirect loop with the **0 rewrites config** provided by
+`sites-available/drupal.conf` or `sites-available/drupal_boost.conf`
+if using [Boost](http://drupal.org/project/boost).
+
+There are two ways to deal with that:
+
+ 1. Install the module
+    [`nginx_fast_config`](http://drupal.org/project/nginx_fast_config)
+    that takes care of this setting removing it from the settings form
+    at `/admin/settings/globalredirect` and presents a status line on
+    the status page at `/admin/reports/status`. This module fixes the
+    issues for you.
+    
+ 2. Take care of the **deslash** setting yourself by disabling it at
+    `/admin/settings/globalredirect`. Note that this is enabled by
+    **default**. 
+    
+This is strictly a **drupal 6** issue.
+
 ## General Features
 
    1. The use of two `server` directives to do the domain name
