@@ -79,7 +79,7 @@ server {
     ### cron externally. If you don't use drush for running cron use
     ### the configuration below.
     #################################################################
-    #include sites-available/drupal_update_cron.conf;
+    #include sites-available/drupal_cron_update.conf;
  
     
     ## For upload progress to work. From the README of the
