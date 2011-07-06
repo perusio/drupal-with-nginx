@@ -165,7 +165,7 @@ This is strictly a **drupal 6** issue.
 
    4. Support for the [Boost](http://drupal.org/project/boost) module.
 
-   5. Support for virtual hosts. The `example.com` file.
+   5. Support for virtual hosts. The `example.com.conf` file.
 
    6. Support for [Sitemaps](http://drupal.org/project/site_map) RSS feeds.
 
@@ -400,7 +400,7 @@ This is strictly a **drupal 6** issue.
    
       `git clone https://github.com/perusio/drupal-with-nginx.git`
    
-   3. Edit the `sites-available/example.com` configuration file to
+   3. Edit the `sites-available/example.com.conf` configuration file to
       suit your requirements. Namely replacing example.com with
       **your** domain.
    
@@ -498,7 +498,7 @@ This is strictly a **drupal 6** issue.
    localhost and non-routable IPs of the 192.168.1.0 network.
     
    To enable the status and ping pages uncomment the line in the
-   `example.com` virtual host configuration file.
+   `example.com.conf` virtual host configuration file.
 
 ## Getting the latest Nginx packaged for Debian or Ubuntu
 
