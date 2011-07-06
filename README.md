@@ -444,6 +444,8 @@ This is strictly a **drupal 6** issue.
       
          netstat --unix -l
          
+      And like this for TCP sockets:   
+         
          netstat -t -l
    
       It should display the PHP CGI socket.
