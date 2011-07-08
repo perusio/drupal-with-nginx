@@ -310,7 +310,7 @@ This is strictly a **drupal 6** issue.
    Example: Calling the top level private files directory `protected`
    instead of `private`.
        
-       location ~* /files/protected {
+       location ^~ /sites/default/files/protected {
          internal;
        }
   
@@ -330,6 +330,21 @@ This is strictly a **drupal 6** issue.
    that is writable by the web server, and use the above location
    (`protected` or `private`) to block access by the client to it.
    
+   Also bear in mind that the above configuration stanza is for a
+   drupal 7 or a drupal 6 site not relying on
+   [purl](http://drupal.org/project/purl). For sites that use it,
+   e.g., sites/products based on
+   [spaces](http://drupal.org/project/spaces) like
+   [OpenAtrium](http://openatrium.com) or
+   [ManagingNews](http://managingnews.com) require a **regex** based
+   location, i.e.:
+   
+       location ~* /sites/default/files/protected {
+         internal;
+       }
+   
+   in order to work properly.
+   
 ## Fast Private File Transfer
 
    Nginx implements
@@ -340,8 +355,7 @@ This is strictly a **drupal 6** issue.
    
    This allows **fast** private file transfers. I've developed a
    module tailored for Nginx:
-   [nginx\_accel\_redirect](https://github.com/perusio/drupal-nginx-fast-x-accel-redirect
-   "Module for Drupal providing fast private file transfer"). 
+   [nginx\_accel\_redirect](http://drupal.org/project/nginx_accel_redirect "Module for Drupal providing fast private file transfer"). 
 
 
 ## Connections per client and DoS Mitigation
