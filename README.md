@@ -588,7 +588,7 @@ This is strictly a **drupal 6** issue.
 
 ## My other nginx configs on github
 
-   + [WordPress]((https://github.com/perusio/wordpress-nginx "WordPress Nginx
+   + [WordPress](https://github.com/perusio/wordpress-nginx "WordPress Nginx
      config")
 
    + [Chive](https://github.com/perusio/chive-nginx "Chive Nginx
@@ -608,7 +608,7 @@ This is strictly a **drupal 6** issue.
 ## TODO
 
    + Implement the handling of Nginx
-     [memcached](http://wiki.nginx.org/HttpMemcachedModule)  backend.
+     [memcached](http://wiki.nginx.org/HttpMemcachedModule) backend.
      
    + Implement caching with the use of the
      [Nginx Cache purge](https://github.com/FRiCKLE/ngx_cache_purge) module.
