@@ -518,6 +518,10 @@ This is strictly a **drupal 6** issue.
    of IP addresses. In the suggested configuration only from
    localhost and non-routable IPs of the 192.168.1.0 network.
     
+   The allowed hosts are defined in a geo block in file
+   `php_fpm_status_allowed_hosts.conf`. You should edit the predefined
+   IP addresses to suit your setup. 
+ 
    To enable the status and ping pages uncomment the line in the
    `example.com.conf` virtual host configuration file.
 
