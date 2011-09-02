@@ -382,8 +382,11 @@ This is strictly a **drupal 6** issue.
    deploying web apps relying on `.htaccess`, or you just want to use
    Nginx as a reverse proxy. The config allows you to do so. Note that
    this provides some benefits over using only Apache, since Nginx is
-   much faster than Apache. Furthermore you can use the proxy cache
-   and/or use Nginx as a load balancer. 
+   much faster than Apache. Not only due to its architecture but also
+   to using
+   [buffering](http://wiki.nginx.org/HttpProxyModule#proxy_buffering)
+   for handling upstream replies. Furthermore you can use the proxy
+   cache and/or use Nginx as a load balancer.
 
 ## Static index.html file
 
