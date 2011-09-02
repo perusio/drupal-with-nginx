@@ -393,7 +393,7 @@ This is strictly a **drupal 6** issue.
    The `/` location is a **_fallback_** location, meaning that after
    trying all other, more specific locations, Nginx, will return here.
    
-   Since there's a `try_files $uri` directive with `@cache`, if using
+   Since there's a `try_files $uri` directive within `@cache`, if using
    [Boost](http://drupal.org/project/boost), or `@drupal`, or
    `index.php?q=$uri&$args` otherwise, as fallback it will return a
    404 if no file is found. Even if you have an `index.html` file at
@@ -618,7 +618,12 @@ This is strictly a **drupal 6** issue.
      [memcached](http://wiki.nginx.org/HttpMemcachedModule) backend.
      
    + Implement caching with the use of the
-     [Nginx Cache purge](https://github.com/FRiCKLE/ngx_cache_purge) module.
+     [Nginx Cache purge](https://github.com/FRiCKLE/ngx_cache_purge)
+     module.
+     
+   + Add [AdvAgg](http://drupal.org/project/advagg) support. (D6)
+   
+   + Add [AgrCache](http://drupal.org/project/agrcache) support. (D7)
 
 ## Acknowledgments
 
