@@ -195,7 +195,11 @@ This is strictly a **drupal 6** issue.
        PHP. Meaning using Nginx as
        [reverse proxy](http://wiki.nginx.org/HttpProxyModule "Nginx
        Proxy Module").
-   
+       
+   14. [Advanced Help](http://drupal.org/project/advanced_help)
+       support.
+       
+   15. [Advanced Aggregation](http://drupal.org/project/advagg) support.    
    
 ## Secure HTTP aka SSL/TLS support
 
