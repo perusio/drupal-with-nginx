@@ -625,8 +625,6 @@ This is strictly a **drupal 6** issue.
      [Nginx Cache purge](https://github.com/FRiCKLE/ngx_cache_purge)
      module.
      
-   + Add [AdvAgg](http://drupal.org/project/advagg) support. (D6)
-   
    + Add [AgrCache](http://drupal.org/project/agrcache) support. (D7)
 
 ## Acknowledgments
