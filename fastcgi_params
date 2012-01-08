@@ -21,5 +21,7 @@ fastcgi_param  SERVER_PORT        $server_port;
 fastcgi_param  SERVER_NAME        $server_name;
 fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
 
+fastcgi_param   HTTPS                   $server_https;
+
 ## PHP only, required if PHP was built with --enable-force-cgi-redirect
 fastcgi_param  REDIRECT_STATUS    200;
