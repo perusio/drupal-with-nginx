@@ -97,8 +97,13 @@ Furthermore there are **two** options for each configuration:
 ## Configuration Selection Algorithm
 
    1. I'm **not using** spaces or any module that relies in custom URL
-      rewrites. Use the `drupal.conf` config in your vhost (`server`
+      rewrites. 
+      
+      * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
       block): `include sites-availables/drupal.conf;`.
+      
+      * On **drupal 6** use the `drupal6.conf` config in your vhost (`server`
+      block): `include sites-availables/drupal6.conf;`.
    
    2. I'm running [OpenAtrium](http://openatrium.com),
       [ManagingNews](http://managingnews.com) or any other site that
@@ -112,6 +117,12 @@ Furthermore there are **two** options for each configuration:
       config in your vhost (`server` block): `include
       sites-availables/drupal_boost.conf;`
       
+      * On **drupal 7** use the `drupal_boost.conf` config in your vhost (`server`
+      block): `include sites-availables/drupal.conf;`.
+      
+      * On **drupal 6** use the `drupal_boost6.conf` config in your vhost (`server`
+      block): `include sites-availables/drupal_boost6.conf;`.
+      
    4. I'm using [Boost](http://drupal.org/project/boost) and running
       [OpenAtrium](http://openatrium.com),
       [ManagingNews](http://managingnews.com) or any other site that
@@ -123,7 +134,6 @@ Furthermore there are **two** options for each configuration:
       cron. Additionally you should also include the
       `drupal_cron_update.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_cron_update.conf;`
-
 
 ## Drupal 6 Global Redirect and the 0 Rewrites Configuration
 
@@ -618,6 +628,9 @@ This is strictly a **drupal 6** issue.
 
 ## TODO
 
+   + Improve the documentation. It's too vague and needs to be more
+     elaborate.
+     
    + Implement the handling of Nginx
      [memcached](http://wiki.nginx.org/HttpMemcachedModule) backend.
      
