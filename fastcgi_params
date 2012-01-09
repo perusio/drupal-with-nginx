@@ -23,3 +23,5 @@ fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
 
 ## PHP only, required if PHP was built with --enable-force-cgi-redirect
 fastcgi_param  REDIRECT_STATUS    200;
+## HTTPS 'on' parameter.
+fastcgi_param  HTTPS              $https_if_not_empty;
