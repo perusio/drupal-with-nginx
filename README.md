@@ -195,7 +195,8 @@ This is strictly a **drupal 6** issue.
        You may consider the
        [init script](github.com/perusio/php-fastcgi-debian-script)
        that I make available here on github that launches the PHP
-       FastCGI daemon and spawns new instances as required.
+       FastCGI daemon and spawns new instances as required. This is
+       not needed if you're using php-fpm.
   
    12. End of the [expensive 404s](http://drupal.org/node/76824
        "Expensive 404s issue") that Drupal usually handles when
@@ -246,10 +247,13 @@ This is strictly a **drupal 6** issue.
       
 ## Security Features
 
-   1. The use of a `default` configuration file to block all illegal
+   1. No direct access to PHP scripts. All PHP scripts, including
+      `index.php` are acessed only internally.
+
+   2. The use of a `default` configuration file to block all illegal
       `Host` HTTP header requests.
 
-   2. Access control using
+   3. Access control using
       [HTTP Basic Auth](http://wiki.nginx.org/NginxHttpAuthBasicModule)
       for `install.php` and other Drupal sensitive files. The
       configuration expects a password file named `.htpasswd-users` in
@@ -274,11 +278,11 @@ This is strictly a **drupal 6** issue.
       Of course you can rename the password file to whatever you want,
       then accordingly change its name in drupal_boost.conf.
 
-   3. Support for
+   4. Support for
       [X-Frame-Options](https://developer.mozilla.org/en/The_X-FRAME-OPTIONS_response_header)
       HTTP header to avoid Clickjacking attacks.
 
-   4. Protection of the upload directory. You can try to bypass the
+   5. Protection of the upload directory. You can try to bypass the
       UNIX `file` utility or the PHP `Fileinfo` extension and upload a
       fake jpeg:
    
@@ -297,17 +301,17 @@ This is strictly a **drupal 6** issue.
       Returning a 404 (Not Found) for every PHP file not matched by
       all the previous locations.
 
-   5. Use of [Strict Transport Security](http://www.chromium.org/sts
+   6. Use of [Strict Transport Security](http://www.chromium.org/sts
       "STS at chromium.org") for enhanced security. It forces during
       the specified period for the configured domain to be contacted
       only over HTTPS. Requires a modern browser to be of use, i.e.,
       **Chrome/Chromium**, **Firefox 4** or **Firefox with
       NoScript**.
       
-   6. DoS prevention with a _low_ number of connections by client
+   7. DoS prevention with a _low_ number of connections by client
       allowed: **16**. This number can be adjusted as you see fit.
    
-   7. The Drupal specific headers like `X-Drupal-Cache` provided by
+   8. The Drupal specific headers like `X-Drupal-Cache` provided by
       [pressflow](https://github.com/pressflow/6) or the `X-Generator`
       header that Drupal 7 sets are both **hidden**. 
 
