@@ -262,6 +262,27 @@ This is strictly a **drupal 6** issue.
       version.
 
       If you're on Debian or any of its derivatives like Ubuntu you
+      need either the
+      [thttpd-util](http://packages.debian.org/search?keywords=thttpd-util)
+      or [apache2-utils](http://packages.debian.org/search?suite%3Dall&section%3Dall&arch%3Dany&searchon%3Dnames&keywords%3Dapache2-utils)
+   package installed. 
+   
+      With `thttpd-util` create your password file by issuing:
+   
+         thtpasswd -c .htpasswd-users <user> <password>
+   
+      With `apache2-utils` create your password file by issuing:
+
+         htpasswd -d -b -c .htpasswd-users <user> <password>
+
+      You should delete this command from your shell history
+      afterwards with `history -d <command number>` or alternatively
+      omit the `-b` switch, then you'll be prompted for the password.
+
+      This creates the file (there's a `-c` switch). For adding
+      additional users omit the `-c`.
+
+      If you're on Debian or any of its derivatives like Ubuntu you
       need the
       [apache2-utils](http://packages.debian.org/search?suite%3Dall&section%3Dall&arch%3Dany&searchon%3Dnames&keywords%3Dapache2-utils)
       package installed. Then create your password file by issuing:
