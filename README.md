@@ -38,30 +38,13 @@
    
    The configuration comes in **two** flavors:
    
-   1. Regular Drupal configuration for a site not relying on
-     [custom_url_rewrite_outbound](http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6). That's
-      the majority of sites out there. This corresponds to the file
-      `drupal.conf`.
+   1. Drupal 6.
 
 
-   2. Drupal configuration for a site that makes use of
-     [custom_url_rewrite_outbound](http://api.drupal.org/api/drupal/developer--hooks--core.php/function/custom_url_rewrite_outbound/6)
-      something that the [purl](http://drupal.org/project/purl) module
-      does and is then used in
-      [spaces](http://drupal.org/project/spaces). Two very popular
-      drupal based projects make use of it:
-      [OpenAtrium](http://openatrium.com) and [ManagingNews](http://managingnews.com).
+   2. Drupal 7.
     
-     That corresponds to the configuration file `drupal_spaces.conf`.
-      
-     Each of these configurations can make use of
-     [Boost](http://drupal.org/project/boost). With the files being
-      `drupal_boost.conf`, for the regular drupal site, or
-      `drupal_spaces_boost.conf` for sites that use custom URL
-      rewrites, like [OpenAtrium](http://openatrium.com) and [ManagingNews](http://managingnews.com).
-      
 Furthermore there are **two** options for each configuration:
-
+      
    1. A **non drush aware** option that uses `wget/curl` to run cron
       and updating the site using `update.php`, i.e., via a web
       interface. 
@@ -96,22 +79,15 @@ Furthermore there are **two** options for each configuration:
     
 ## Configuration Selection Algorithm
 
-   1. I'm **not using** spaces or any module that relies in custom URL
-      rewrites. 
-      
+   1. I'm **not** using [Boost](http://drupal.org/project/boost):   
+   
       * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
       block): `include sites-availables/drupal.conf;`.
       
       * On **drupal 6** use the `drupal6.conf` config in your vhost (`server`
       block): `include sites-availables/drupal6.conf;`.
-   
-   2. I'm running [OpenAtrium](http://openatrium.com),
-      [ManagingNews](http://managingnews.com) or any other site that
-      **uses** [spaces](http://drupal.org/project/spaces). Use the
-      `drupal_spaces.conf` config in your vhost (`server` block):
-      `include sites-availables/drupal_spaces.conf;`
     
-   3. I'm using [Boost](http://drupal.org/project/boost) for caching
+   2. I'm using [Boost](http://drupal.org/project/boost) for caching
       on my drupal site and **not using** spaces or any module that
       relies in custom URL rewrites. Use the `drupal_boost.conf`
       config in your vhost (`server` block): `include
@@ -122,15 +98,8 @@ Furthermore there are **two** options for each configuration:
       
       * On **drupal 6** use the `drupal_boost6.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_boost6.conf;`.
-      
-   4. I'm using [Boost](http://drupal.org/project/boost) and running
-      [OpenAtrium](http://openatrium.com),
-      [ManagingNews](http://managingnews.com) or any other site that
-      **uses** [spaces](http://drupal.org/project/spaces). Use the
-      `drupal_spaces_boost.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal_spaces_boost.conf;`
    
-   5. I'm **not using drush** for updating and running
+   3. I'm **not using drush** for updating and running
       cron. Additionally you should also include the
       `drupal_cron_update.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_cron_update.conf;`
