@@ -281,9 +281,9 @@ This is strictly a **drupal 6** issue.
    
           echo -e "\xff\xd8\xff\xe0\n<?php echo 'hello'; ?>" > test.jpg
       
-      If you run `php test.jpg`  you get 'hello'. The fact is that **all
-      files** with php extension are either matched by a particular
-      location, as is the case for `index.php`, `xmlrpc.php`,
+      If you run `php test.jpg` you get 'hello'. The fact is that
+      **all files** with php extension are either matched by a
+      particular location, as is the case for `xmlrpc.php`,
       `update.php` and `install.php` or match the last directive of
       the configuration:
 
@@ -293,6 +293,10 @@ This is strictly a **drupal 6** issue.
 
       Returning a 404 (Not Found) for every PHP file not matched by
       all the previous locations.
+      
+      Note that `index.php` is accessed only **indirectly**, meaning
+      it always from within the Nginx config. You cannot access it
+      directly from outside.
 
    6. Use of [Strict Transport Security](http://www.chromium.org/sts
       "STS at chromium.org") for enhanced security. It forces during
