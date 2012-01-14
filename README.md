@@ -40,7 +40,6 @@
    
    1. Drupal 6.
 
-
    2. Drupal 7.
     
 Furthermore there are **two** options for each configuration:
@@ -179,8 +178,12 @@ This is strictly a **drupal 6** issue.
    14. [Advanced Help](http://drupal.org/project/advanced_help)
        support.
        
-   15. [Advanced Aggregation](http://drupal.org/project/advagg) support.    
-   
+   15. [Advanced Aggregation](http://drupal.org/project/advagg)
+       support.
+       
+   16. [Microcaching](http://fennb.com/microcaching-speed-your-app-up-250x-with-no-n)
+       support for both **anonymous** and **authenticated** users.
+           
 ## Secure HTTP aka SSL/TLS support
 
    1. By default and since version
@@ -416,7 +419,75 @@ This is strictly a **drupal 6** issue.
    [`error_page`](http://wiki.nginx.org/HttpCoreModule#error_page)
    directive. There's an exact location `/` that issues a
    200 code and serves `/index.html` when a 404 is returned.
-   
+
+## Microcaching
+
+### Introduction
+
+  [Microcaching](http://fennb.com/microcaching-speed-your-app-up-250x-with-no-n)
+  is a caching concept that takes *simple is better* approach. Meaning
+  we don't care about content expiration because the cache valid time
+  is small enough for that not to be an issue. In this config we set
+  it to **15** seconds. You can tune all cache parameters to your
+  liking. Check the `microcache_fcgi.conf` or `microcache_proxy.conf`
+  for **anonymous** users cache and `microcache_fcgi_auth.conf` or
+  `microcache_proxy_auth.conf` for **authenticated** users cache.
+
+### Anonymous and Authenticated users microcaching
+
+  This configuration supports both **anonymous** and **authenticated**
+  users caching. You should enable **one and only one**. The
+  authenticated user cache **also** supports anonymous users.
+  
+  By default on both drupal 6 and drupal 7 the **anonymous** user
+  microcache is enabled. If you want to use the **authenticated** user
+  microcache instead comment out the line:
+  
+  1. `include sites-available/microcache_fcgi.conf` if using the FCGI
+     microcache (when proxying to FCGI).
+     
+  2. `include sites-available/microcache_proxy.conf` if using the
+     proxy cache (proxying to Apache or other PHP handler).
+ 
+  and uncomment:
+  
+  1. `include sites-available/microcache_fcgi_auth.conf` if using the FCGI
+     microcache (when proxying to FCGI).
+     
+  2. `include sites-available/microcache_proxy_auth.conf` if using the
+     proxy cache (proxying to Apache or other PHP handler).
+ 
+  You're set to go.
+  
+## Boost and authenticated user microcaching
+
+ When using [Boost](http://drupal.org/project/boost) **you can use** the
+ authenticated user microcache. It will give you an additional layer
+ of caching.
+ 
+ This is enabled by default. Comment out the `include
+ sites-available/microcache_fcgi_auth.conf` or `include
+ sites-available/microcache_proxy_auth.conf` line if you don't want to
+ use microcaching at all with Boost.
+ 
+## Microcaching for authenticated users under the hood
+
+ The way microcaching for authentitcated is implemented uses a
+ `$cache_uid` variable that is set on
+ [`map_cache.conf`](https://github.com/perusio/drupal-with-nginx/blob/master/map_cache.conf#L21).
+ 
+ + anonymous users get a `$cache_uid` value of `nil`.
+ 
+ + authenticated users get a `$cache_uid` value that is the **session
+   id**. Note that the named capture that grabs the session ID assumes
+   that you're using the **default** setting in terms of what drupal
+   calls the session cookie. Hence it starts with `SESS`. If this
+   isn't the case just remove the string `SESS` from the regex.
+
+   See
+   [`drupal_settings_initialize()`](http://api.drupal.org/api/drupal/includes--bootstrap.inc/function/drupal_settings_initialize/7)
+   for **drupal 7** or [`conf_init()`](http://api.drupal.org/api/drupal/includes--bootstrap.inc/function/conf_init/6) for **drupal 6** for further information.
+
 ## Installation
 
    1. Move the old `/etc/nginx` directory to `/etc/nginx.old`.
