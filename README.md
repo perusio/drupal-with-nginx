@@ -463,7 +463,7 @@ This is strictly a **drupal 6** issue.
  
   You're set to go.
   
-## Boost and authenticated user microcaching
+### Boost and authenticated user microcaching
 
  When using [Boost](http://drupal.org/project/boost) **you can use** the
  authenticated user microcache. It will give you an additional layer
@@ -474,7 +474,7 @@ This is strictly a **drupal 6** issue.
  sites-available/microcache_proxy_auth.conf` line if you don't want to
  use microcaching at all with Boost.
  
-## Microcaching for authenticated users under the hood
+### Microcaching for authenticated users under the hood
 
  The way microcaching for authentitcated is implemented uses a
  `$cache_uid` variable that is set on
@@ -491,6 +491,16 @@ This is strictly a **drupal 6** issue.
    See
    [`drupal_settings_initialize()`](http://api.drupal.org/api/drupal/includes--bootstrap.inc/function/drupal_settings_initialize/7)
    for **drupal 7** or [`conf_init()`](http://api.drupal.org/api/drupal/includes--bootstrap.inc/function/conf_init/6) for **drupal 6** for further information.
+
+### Useful scripts for working with Nginx cache
+
+ Here's two useful scripts for working with the Nginx cache:
+ 
+ 1. [nginx cache inspector](https://github.com/perusio/nginx-cache-inspector)
+    allows you to inspect the cache files.
+    
+ 2. [nginx cache purge](https://github.com/perusio/nginx-cache-purge)
+    allows you to purge and item or set of items from the Nginx cache.   
 
 ## Installation
 
