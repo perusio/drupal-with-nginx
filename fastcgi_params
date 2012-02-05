@@ -29,4 +29,4 @@ fastcgi_param  REDIRECT_STATUS    200;
 ## support this comment out the line below.
 fastcgi_param  HTTPS              $https if_not_empty;
 ## For Nginx versions below 1.1.11 uncomment the line below after commenting out the above.
-#fastcgi_param  HTTPS            $https  
+#fastcgi_param  HTTPS            $https;
