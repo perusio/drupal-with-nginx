@@ -24,7 +24,7 @@
    [yhager's](github.com/yhager/nginx_drupal) configuration, tempered
    by [omega8cc](http://github.com/omega8cc/nginx-for-drupal) and
    [Brian Mercer](http://test.brianmercer.com/content/nginx-configuration-drupal)
-   configurations. 
+   (dead link) configurations. 
    
    I've since then changed it substantially. Tried to remove as best
    as I can the traces of bad habits promoted by Apache's
@@ -88,9 +88,7 @@ Furthermore there are **two** options for each configuration:
     
    2. I'm using [Boost](http://drupal.org/project/boost) for caching
       on my drupal site and **not using** spaces or any module that
-      relies in custom URL rewrites. Use the `drupal_boost.conf`
-      config in your vhost (`server` block): `include
-      sites-availables/drupal_boost.conf;`
+      relies in custom URL rewrites.
       
       * On **drupal 7** use the `drupal_boost.conf` config in your vhost (`server`
       block): `include sites-availables/drupal.conf;`.
