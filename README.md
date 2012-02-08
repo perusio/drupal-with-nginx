@@ -77,7 +77,7 @@ Furthermore there are **two** options for each configuration:
       `/path/to/drush.php`.
     
 ## Configuration Selection Algorithm
-
+che
    1. I'm **not** using [Boost](http://drupal.org/project/boost):   
    
       * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
@@ -99,6 +99,28 @@ Furthermore there are **two** options for each configuration:
       cron. Additionally you should also include the
       `drupal_cron_update.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_cron_update.conf;`
+
+## Boost and Drupal 6
+
+The standard Drupal 6 core sets cookies also for anonymous
+users. Therefore the following map directive from `map_cache.conf`
+will result in the Boost generated pages **not being served**.
+
+    map $http_cookie $no_cache {
+        default 0;
+        ~SESS 1; # PHP session cookie
+    }
+
+If you're using the standard Drupal 6 **without**
+[`no_anon`](http://drupal.org/project/no_anon) then the cache bursting
+map directive is:
+
+    map $http_cookie $no_cache {
+        default 0;
+        ~DRUPAL_UID 1; # PHP session cookie
+    }
+
+This is properly documented in `map_cache.conf`.
 
 ## Drupal 6 Global Redirect and the 0 Rewrites Configuration
 
