@@ -456,6 +456,13 @@ This is strictly a **drupal 6** issue.
   for **anonymous** users cache and `microcache_fcgi_auth.conf` or
   `microcache_proxy_auth.conf` for **authenticated** users cache.
 
+## Microcaching and Drupal
+
+ You can implement a **microcaching** strategy on drupal using
+ [cache_warmer](http://drupal.org/project/cache_warmer). Tune the many
+ options of that [drush](http://www.drush.org) command to fit your
+ site traffic pattern.
+
 ### Anonymous and Authenticated users microcaching
 
   This configuration supports both **anonymous** and **authenticated**
