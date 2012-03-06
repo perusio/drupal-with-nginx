@@ -720,8 +720,12 @@ This is strictly a **drupal 6** issue.
    + [Chive](https://github.com/perusio/chive-nginx "Chive Nginx
      config")
      
-   + [Piwik](https://github.com/perusio/piwik-nginx "Piwik Nginx config")
-
+   + [Piwik](https://github.com/perusio/piwik-nginx "Piwik Nginx
+     config")
+       
+   + [SquirrelMail](https://github.com/perusio/squirrelmail-nginx
+     "SquirrelMail Nginx configuration")
+  
 ## Securing your PHP configuration
 
    I have created a small shell script that parses your `php.ini` and
