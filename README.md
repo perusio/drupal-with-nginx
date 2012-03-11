@@ -177,30 +177,34 @@ This is strictly a **drupal 6** issue.
    
    10. Support for **private file** serving in drupal.
 
-   11. Use of UNIX sockets in `/tmp/` subdirectory with permissions
-       **700**, i.e., accessible only to the user running the process.
-       You may consider the
+   11. Support for
+       [hot link protection](https://simple.wikipedia.org/wiki/Hot-linking)
+       imagecache generated images.
+
+   12. If using `php-cgi` with UNIX sockets in `/tmp/` subdirectory
+       with permissions **700**, i.e., accessible only to the user
+       running the process.  You may consider the
        [init script](github.com/perusio/php-fastcgi-debian-script)
        that I make available here on github that launches the PHP
        FastCGI daemon and spawns new instances as required. This is
        not needed if you're using php-fpm.
   
-   12. End of the [expensive 404s](http://drupal.org/node/76824
+   13. End of the [expensive 404s](http://drupal.org/node/76824
        "Expensive 404s issue") that Drupal usually handles when
        using Apache with the default `.htaccess`.
   
-   13. Possibility of using **Apache** as a backend for dealing with
+   14. Possibility of using **Apache** as a backend for dealing with
        PHP. Meaning using Nginx as
        [reverse proxy](http://wiki.nginx.org/HttpProxyModule "Nginx
        Proxy Module").
        
-   14. [Advanced Help](http://drupal.org/project/advanced_help)
+   15. [Advanced Help](http://drupal.org/project/advanced_help)
        support.
        
-   15. [Advanced Aggregation](http://drupal.org/project/advagg)
+   16. [Advanced Aggregation](http://drupal.org/project/advagg)
        support.
        
-   16. [Microcaching](http://fennb.com/microcaching-speed-your-app-up-250x-with-no-n)
+   17. [Microcaching](http://fennb.com/microcaching-speed-your-app-up-250x-with-no-n)
        support for both **anonymous** and **authenticated** users.
            
 ## Secure HTTP aka SSL/TLS support
@@ -391,7 +395,6 @@ This is strictly a **drupal 6** issue.
    module tailored for Nginx:
    [nginx\_accel\_redirect](http://drupal.org/project/nginx_accel_redirect "Module for Drupal providing fast private file transfer"). 
 
-
 ## Connections per client and DoS Mitigation
 
    The **connection zone** defined, called `arbeit` allows for **16**
@@ -409,6 +412,22 @@ This is strictly a **drupal 6** issue.
    server. In that case tweak the value of `limit_conn` until you have
    a working setup. This number must be as small as possible as a way
    to mitigate the potential for DoS attacks.
+
+## Image hotlinking protection
+
+   Imagecache generated images can be **expensive** to generate. In
+   those cases providing protection against
+   [hotlinking](https://simple.wikipedia.org/wiki/Hot-linking) is a
+   must.
+   
+   To make use of that uncomment the proper line on the `/imagecache/`
+   location that includes the
+   `sites-available/hotlinking_protection.conf` file.
+   
+   The protection is based on the
+   [Nginx referer module](http://nginx.org/en/docs/http/ngx_http_referer_module.html). You
+   must specify the hosts that are allowed to access the images. The
+   hostnames can use wildcards or use regexes.
 
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
 
