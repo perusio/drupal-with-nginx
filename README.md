@@ -774,3 +774,6 @@ This is strictly a **drupal 6** issue.
    "Nginx Drupal group") group on groups.drupal.org. They've helped me
    sort out the snafus on this config and offered insights on how to
    improve it.
+
+   Thanks to [Richard](https://github.com/perusio/drupal-with-nginx/issues/34) for setting
+   me down the path of image hotlinking protection.
