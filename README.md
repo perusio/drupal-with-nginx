@@ -547,6 +547,14 @@ This is strictly a **drupal 6** issue.
  2. [nginx cache purge](https://github.com/perusio/nginx-cache-purge)
     allows you to purge and item or set of items from the Nginx cache.   
 
+## IPv6 and IPv4
+
+The configuration of the example vhosts uses **separate** sockets for
+IPv6 and IPv4. This way is simpler for those not (yet) having IPv6
+support to disabli it by commenting out the
+[`listen`](http://nginx.org/en/docs/http/ngx_http_core_module.html#listen)
+directive relative to IPv6.
+
 ## Installation
 
    1. Move the old `/etc/nginx` directory to `/etc/nginx.old`.
@@ -758,14 +766,7 @@ This is strictly a **drupal 6** issue.
 
    + Improve the documentation. It's too vague and needs to be more
      elaborate.
-     
-   + Implement the handling of Nginx
-     [memcached](http://wiki.nginx.org/HttpMemcachedModule) backend.
-     
-   + Implement caching with the use of the
-     [Nginx Cache purge](https://github.com/FRiCKLE/ngx_cache_purge)
-     module.
-     
+          
    + Add [AgrCache](http://drupal.org/project/agrcache) support. (D7)
 
 ## Acknowledgments
