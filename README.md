@@ -335,6 +335,9 @@ This is strictly a **drupal 6** issue.
       [pressflow](https://github.com/pressflow/6) or the `X-Generator`
       header that Drupal 7 sets are both **hidden**. 
 
+   9. Limitation of allowed HTTP methods. Out of the box only `GET`,
+      `HEAD` and `POST`are allowed.
+      
 ## Private file handling
 
    This config assumes that **private** files are stored under a directory
@@ -428,6 +431,30 @@ This is strictly a **drupal 6** issue.
    [Nginx referer module](http://nginx.org/en/docs/http/ngx_http_referer_module.html). You
    must specify the hosts that are allowed to access the images. The
    hostnames can use wildcards or use regexes.
+
+## HTTP allowed methods made to measure
+
+   For a standard drupal install there's no need for any method
+   besides `GET`, `HEAD` and `POST`. The allowed methods are
+   enumerated in the file `map_block_http_methods.conf`.
+   
+   If your site uses/provide web services then you must add the
+   methods you need to the list. For example if you want to allow
+   `PUT` then do:
+   
+       map $request_method $not_allowed_method {
+           default 1;
+           GET 0;
+           HEAD 0;
+           POST 0;
+           PUT 0;
+       }
+
+   Note that this enables `PUT` for all locations and clients. If you
+   need a finer control than use the
+   [`limit_except`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_except)
+   directive and enumerate the client IPs that are allowed to use the
+   *extra* methods like `PUT`.
 
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
 
