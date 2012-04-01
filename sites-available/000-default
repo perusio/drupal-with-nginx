@@ -9,11 +9,6 @@ server {
     # running a Nginx version less than 0.8.20.
     # listen [::]:80 default;
 
-    # Accept redirects based on the value of the Host header. If
-    # there's no valid vhost configuration file with a
-    # corresponding server_name directive then signal an error and
-    # fail silently. See:
-    # http://wiki.nginx.org/NginxHttpCoreModule#server_name_in_redirect
-    server_name_in_redirect off;
+    server_name _;
     return 444;
 }
