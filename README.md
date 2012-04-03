@@ -77,7 +77,7 @@ Furthermore there are **two** options for each configuration:
       `/path/to/drush.php`.
     
 ## Configuration Selection Algorithm
-che
+
    1. I'm **not** using [Boost](http://drupal.org/project/boost):   
    
       * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
