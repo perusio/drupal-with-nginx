@@ -81,24 +81,24 @@ Furthermore there are **two** options for each configuration:
    1. I'm **not** using [Boost](http://drupal.org/project/boost):   
    
       * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal.conf;`.
+      block): `include extra/drupal.conf;`.
       
       * On **drupal 6** use the `drupal6.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal6.conf;`.
+      block): `include extra/drupal6.conf;`.
     
    2. I'm using [Boost](http://drupal.org/project/boost) for caching
       on my drupal site.
       
       * On **drupal 7** use the `drupal_boost.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal_boost.conf;`.
+      block): `include extra/drupal_boost.conf;`.
       
       * On **drupal 6** use the `drupal_boost6.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal_boost6.conf;`.
+      block): `include extra/drupal_boost6.conf;`.
    
    3. I'm **not using drush** for updating and running
       cron. Additionally you should also include the
       `drupal_cron_update.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal_cron_update.conf;`
+      block): `include extra/drupal_cron_update.conf;`
 
 ## Boost and Drupal 6
 
@@ -128,7 +128,7 @@ There's a setting that is enabled by default in
 [`globalredirect`](http://drupal.org/project/globalredirect) that
 removes the trailing slash in the URIs. That setting creates a
 redirect loop with the **0 rewrites config** provided by
-`sites-available/drupal.conf` or `sites-available/drupal_boost.conf`
+`extra/drupal.conf` or `extra/drupal_boost.conf`
 if using [Boost](http://drupal.org/project/boost).
 
 There are two ways to deal with that:
@@ -425,7 +425,7 @@ This is strictly a **drupal 6** issue.
    
    To make use of that uncomment the proper line on the `/imagecache/`
    location that includes the
-   `sites-available/hotlinking_protection.conf` file.
+   `extra/hotlinking_protection.conf` file.
    
    The protection is based on the
    [Nginx referer module](http://nginx.org/en/docs/http/ngx_http_referer_module.html). You
@@ -519,18 +519,18 @@ This is strictly a **drupal 6** issue.
   microcache is enabled. If you want to use the **authenticated** user
   microcache instead comment out the line:
   
-  1. `include sites-available/microcache_fcgi.conf` if using the FCGI
+  1. `include extra/microcache_fcgi.conf` if using the FCGI
      microcache (when proxying to FCGI).
      
-  2. `include sites-available/microcache_proxy.conf` if using the
+  2. `include extra/microcache_proxy.conf` if using the
      proxy cache (proxying to Apache or other PHP handler).
  
   and uncomment:
   
-  1. `include sites-available/microcache_fcgi_auth.conf` if using the FCGI
+  1. `include extra/microcache_fcgi_auth.conf` if using the FCGI
      microcache (when proxying to FCGI).
      
-  2. `include sites-available/microcache_proxy_auth.conf` if using the
+  2. `include extra/microcache_proxy_auth.conf` if using the
      proxy cache (proxying to Apache or other PHP handler).
  
   You're set to go.
@@ -542,8 +542,8 @@ This is strictly a **drupal 6** issue.
  of caching.
  
  This is enabled by default. Comment out the `include
- sites-available/microcache_fcgi_auth.conf` or `include
- sites-available/microcache_proxy_auth.conf` line if you don't want to
+ extra/microcache_fcgi_auth.conf` or `include
+ extra/microcache_proxy_auth.conf` line if you don't want to
  use microcaching at all with Boost.
  
 ### Microcaching for authenticated users under the hood
