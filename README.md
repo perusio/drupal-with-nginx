@@ -329,7 +329,7 @@ This is strictly a **drupal 6** issue.
       NoScript**.
       
    7. DoS prevention with a _low_ number of connections by client
-      allowed: **16**. This number can be adjusted as you see fit.
+      allowed: **32**. This number can be adjusted as you see fit.
    
    8. The Drupal specific headers like `X-Drupal-Cache` provided by
       [pressflow](https://github.com/pressflow/6) or the `X-Generator`
@@ -400,7 +400,7 @@ This is strictly a **drupal 6** issue.
 
 ## Connections per client and DoS Mitigation
 
-   The **connection zone** defined, called `arbeit` allows for **16**
+   The **connection zone** defined, called `arbeit` allows for **32**
    connections to be established for each client. That seems to me to
    be a _reasonable_ number. It could happen that you have a setup
    with lots of CDNs (see this
@@ -408,9 +408,9 @@ This is strictly a **drupal 6** issue.
    or extensive
    [domain sharding](http://www.stevesouders.com/blog/2009/05/12/sharding-dominant-domains/)
    and the number of allowed connections by client can be greater than
-   16, specially when using Nginx as a reverse proxy. 
+   32, specially when using Nginx as a reverse proxy. 
    
-   It may happen that 16 is not enough and you start getting a lot of
+   It may happen that 32 is not enough and you start getting a lot of
    `503 Service Unavailable` status codes as a reply from the
    server. In that case tweak the value of `limit_conn` until you have
    a working setup. This number must be as small as possible as a way
