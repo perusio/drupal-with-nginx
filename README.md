@@ -781,7 +781,8 @@ replace** the indicated address by **your** address.
    + [Piwik](https://github.com/perusio/piwik-nginx "Piwik Nginx
      config")
 
-   + [Redmine](https://github.com/perusio/redmine-nginx "Redmine Nginx")
+   + [Redmine](https://github.com/perusio/redmine-nginx "Redmine Nginx
+     configuration")
 
    + [SquirrelMail](https://github.com/perusio/squirrelmail-nginx
      "SquirrelMail Nginx configuration")
