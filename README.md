@@ -578,9 +578,13 @@ This is strictly a **drupal 6** issue.
 
 The configuration of the example vhosts uses **separate** sockets for
 IPv6 and IPv4. This way is simpler for those not (yet) having IPv6
-support to disabli it by commenting out the
+support to disable it by commenting out the
 [`listen`](http://nginx.org/en/docs/http/ngx_http_core_module.html#listen)
-directive relative to IPv6.
+directive with the `ipv6only=on` parameter.
+
+Note that the IPv6 address uses an IP _stolen_ from the
+[IPv6 Wikipedia page](https://en.wikipedia.org/wiki/IPv6). You **must
+replace** the indicated address by **your** address.
 
 ## Installation
 
