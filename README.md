@@ -160,28 +160,30 @@ This is strictly a **drupal 6** issue.
    set of IPs addresses you specify. This is for the **non drush
    aware** version.
 
-   4. Support for the [Boost](http://drupal.org/project/boost) module.
+   4. Support for [multisite](http://drupal.org/documentation/install/multi-site).
 
-   5. Support for virtual hosts. The `example.com.conf` file.
+   5. Support for the [Boost](http://drupal.org/project/boost) module.
 
-   6. Support for [Sitemaps](http://drupal.org/project/site_map) RSS feeds.
+   6. Support for virtual hosts. The `example.com.conf` file.
 
-   7. Support for the
+   7. Support for [Sitemaps](http://drupal.org/project/site_map) RSS feeds.
+
+   8. Support for the
       [Filefield Nginx Progress](http://drupal.org/project/filefield_nginx_progress)
       module for the upload progress bar.
 
-   8. Use of **non-capturing** regex for all directives that are not
+   9. Use of **non-capturing** regex for all directives that are not
       rewrites that need to use URI components.1
 
-   9. IPv6 and IPv4 support.
+   10. IPv6 and IPv4 support.
    
-   10. Support for **private file** serving in drupal.
+   11. Support for **private file** serving in drupal.
 
-   11. Support for
+   12. Support for
        [hot link protection](https://simple.wikipedia.org/wiki/Hot-linking)
        imagecache generated images.
 
-   12. If using `php-cgi` with UNIX sockets in `/tmp/` subdirectory
+   13. If using `php-cgi` with UNIX sockets in `/tmp/` subdirectory
        with permissions **700**, i.e., accessible only to the user
        running the process.  You may consider the
        [init script](github.com/perusio/php-fastcgi-debian-script)
@@ -189,22 +191,22 @@ This is strictly a **drupal 6** issue.
        FastCGI daemon and spawns new instances as required. This is
        not needed if you're using php-fpm.
   
-   13. End of the [expensive 404s](http://drupal.org/node/76824
+   14. End of the [expensive 404s](http://drupal.org/node/76824
        "Expensive 404s issue") that Drupal usually handles when
        using Apache with the default `.htaccess`.
   
-   14. Possibility of using **Apache** as a backend for dealing with
+   15. Possibility of using **Apache** as a backend for dealing with
        PHP. Meaning using Nginx as
        [reverse proxy](http://wiki.nginx.org/HttpProxyModule "Nginx
        Proxy Module").
        
-   15. [Advanced Help](http://drupal.org/project/advanced_help)
+   16. [Advanced Help](http://drupal.org/project/advanced_help)
        support.
        
-   16. [Advanced Aggregation](http://drupal.org/project/advagg)
+   17. [Advanced Aggregation](http://drupal.org/project/advagg)
        support.
        
-   17. [Microcaching](http://fennb.com/microcaching-speed-your-app-up-250x-with-no-n)
+   18. [Microcaching](http://fennb.com/microcaching-speed-your-app-up-250x-with-no-n)
        support for both **anonymous** and **authenticated** users.
            
 ## Secure HTTP aka SSL/TLS support
@@ -456,6 +458,27 @@ This is strictly a **drupal 6** issue.
    directive and enumerate the client IPs that are allowed to use the
    *extra* methods like `PUT`.
 
+## Multisite support
+
+   [Drupal multisite](http://drupal.org/documentation/install/multi-site)
+   is supported out of the box with this configuration you just need
+   to configure the
+   [`server_name`](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name)
+   directive with **all** the sites that your Drupal installation
+   serves.
+   
+   For example your Drupal installation serves the sites
+   `foo.example.com`, `bar.example.net` and
+   `baz.foo.example.org`. Then you need to configure your vhost like
+   this:
+   
+       server_name foo.example.com bar.example.net baz.foo.example.org;
+       
+   Note that Nginx allows for the server name to be either a regex or
+   a wildcard expression. See
+   [this](http://nginx.org/en/docs/http/server_names.html) to delve
+   deeper into the multiple ways to define server names.
+
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
 
    If you **absolutely need** to use the rather _bad habit_ of
@@ -489,6 +512,39 @@ This is strictly a **drupal 6** issue.
    directive. There's an exact location `/` that issues a
    200 code and serves `/index.html` when a 404 is returned.
 
+## Gzipped static files
+
+ Nginx has a directive
+ [`gzip_static`](http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html#gzip_static)
+ that when set to `on` in a given location makes it always search for
+ a file ending in `.gz` before trying to serve the file. This involves
+ making an **additional** `stat()` call. It isn't generally used. So
+ you can save that additional call for extracting even more speed from
+ Nginx.
+
+ Example if we're trying to serve `foobar.html` in a certain location
+ if `gzip_static` is set to `on`, then Nginx will make a `stat()` call
+ to try to serve `foobar.html.gz` first. 
+
+ Exceptions to that rule are rare in the drupal world. The most common
+ occasion to found such a practice is when using Boost. Since there's
+ a configuration option to make it create gzipped HTML pages in its
+ cache.
+
+ By default on the Boost cache locations we have:
+ 
+     gzip_static on;
+
+ If you have **other** locations, besides the Boost cache, that
+ have gzipped files to be served you have to set:
+ 
+     gzip_static on;
+ 
+ Note that in order to use `gzip_static` the
+ [`ngx_http_gzip_static_module`](http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html)
+ must be **enabled**. Check your nginx with `nginx -V` to see if the
+ module is enabled.
+ 
 ## Microcaching
 
 ### Introduction
