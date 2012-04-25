@@ -453,7 +453,7 @@ This is strictly a **drupal 6** issue.
        }
 
    Note that this enables `PUT` for all locations and clients. If you
-   need a finer control than use the
+   need a finer control then use the
    [`limit_except`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_except)
    directive and enumerate the client IPs that are allowed to use the
    *extra* methods like `PUT`.
