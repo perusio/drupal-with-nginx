@@ -78,28 +78,33 @@ Furthermore there are **two** options for each configuration:
     
 ## Configuration Selection Algorithm
 
-   1. I'm **not** using [Boost](http://drupal.org/project/boost):   
+ 1. I'm **not** using [Boost](http://drupal.org/project/boost):   
    
-      * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
+    * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
       block): `include sites-availables/drupal.conf;`.
       
-      * On **drupal 6** use the `drupal6.conf` config in your vhost (`server`
+    * On **drupal 6** use the `drupal6.conf` config in your vhost (`server`
       block): `include sites-availables/drupal6.conf;`.
     
-   2. I'm using [Boost](http://drupal.org/project/boost) for caching
+ 2. I'm using [Boost](http://drupal.org/project/boost) for caching
       on my drupal site.
       
-      * On **drupal 7** use the `drupal_boost.conf` config in your vhost (`server`
+    * On **drupal 7** use the `drupal_boost.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_boost.conf;`.
       
-      * On **drupal 6** use the `drupal_boost6.conf` config in your vhost (`server`
+    * On **drupal 6** use the `drupal_boost6.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_boost6.conf;`.
    
-   3. I'm **not using drush** for updating and running
+ 3. I'm **not using drush** for updating and running
       cron. Additionally you should also include the
       `drupal_cron_update.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_cron_update.conf;`
-
+      
+ 4. I'm using **drupal 8**. Just use the drupal 7 configuration. The
+    only thing that changes so far is the location of `install.php`.
+    
+    It's `/core/install.php` instead of `install.php`.
+    
 ## Boost and Drupal 6
 
 The standard Drupal 6 core sets cookies also for anonymous
@@ -208,6 +213,8 @@ This is strictly a **drupal 6** issue.
        
    18. [Microcaching](http://fennb.com/microcaching-speed-your-app-up-250x-with-no-n)
        support for both **anonymous** and **authenticated** users.
+       
+   19. Support for drupal 8.     
            
 ## Secure HTTP aka SSL/TLS support
 
@@ -478,6 +485,18 @@ This is strictly a **drupal 6** issue.
    a wildcard expression. See
    [this](http://nginx.org/en/docs/http/server_names.html) to delve
    deeper into the multiple ways to define server names.
+
+   This is the most **simple** multisite setup. You can have different
+   vhosts. I find that it sorts of defeats the purpose to have to deal
+   with different vhosts for a multisite. You get all the advantages
+   of a set of separate sites in terms of web server configuration,
+   while getting no advantage in terms of code separation.
+
+   As very wise man once said: everyhting in life is a matter of
+   taste. I don't like multisite. It's something that might be handy
+   for dealing with small sites, but quickly becomes unmaintanable
+   with large sites. Code separation is a good thing. You've been
+   warned.
 
 ## Nginx as a Reverse Proxy: Proxying to Apache for PHP
 
