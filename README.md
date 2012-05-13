@@ -712,7 +712,7 @@ replace** the indicated address by **your** address.
    
  2. Clone the git repository from github:
    
-        `git clone https://github.com/perusio/drupal-with-nginx.git`
+        git clone https://github.com/perusio/drupal-with-nginx.git
    
  3. Edit the `sites-available/example.com.conf` configuration file to
     suit your requirements. Namely replacing example.com with **your**
