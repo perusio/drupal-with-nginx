@@ -102,45 +102,45 @@ version.
 
  1. I'm **not** using [Boost](http://drupal.org/project/boost):   
    
-    * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal.conf;`.
+  * On **drupal 7** use the `drupal.conf` config in your vhost
+    (`server` block): `include sites-availables/drupal.conf;`.
     
-    * On **drupal 6** having to serve URIs that need to be
-      **escaped**, e.g., that have `+` and/or `?` then use the
-      `drupal_escaped.conf` config in your
-       vhost (`server` block): `include sites-available/drupal_escaped.conf`.
+  * On **drupal 6** having to serve URIs that need to be **escaped**,
+    e.g., that have `+` and/or `?` then use the `drupal_escaped.conf`
+    config in your vhost (`server` block): 
+    `include sites-available/drupal_escaped.conf`.
        
-    * On **drupal 6** use the `drupal6.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal6.conf;`.
+  * On **drupal 6** use the `drupal6.conf` config in your vhost
+    (`server` block): `include sites-availables/drupal6.conf;`.
     
-    * On **drupal 6** if having to serve URIs that need to be
-      **escaped**, e.g., that have `+` and/or `?` then use the
-      `drupal6_escaped.conf` config in your
-       vhost (`server` block): `include sites-available/drupal6_escaped.conf`.
+  * On **drupal 6** if having to serve URIs that need to be
+    **escaped**, e.g., that have `+` and/or `?` then use the
+    `drupal6_escaped.conf` config in your vhost (`server` block):
+    `include sites-available/drupal6_escaped.conf`.
     
  2. I'm using [Boost](http://drupal.org/project/boost) for caching
       on my drupal site.
       
-    * On **drupal 7** use the `drupal_boost.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal_boost.conf;`.
+  * On **drupal 7** use the `drupal_boost.conf` config in your vhost
+    (`server` block): `include sites-availables/drupal_boost.conf;`.
 
-    * On **drupal 7** if having to serve URIs that need to be **escaped**,
-      e.g., that have `+` and/or `?` then use the
-      `drupal_boost_escaped.conf` config in your
-       vhost (`server` block): `include sites-available/drupal_boost_escaped.conf`.
+  * On **drupal 7** if having to serve URIs that need to be
+    **escaped**, e.g., that have `+` and/or `?` then use the
+    `drupal_boost_escaped.conf` config in your vhost (`server` block):
+    `include sites-available/drupal_boost_escaped.conf`.
 
-    * On **drupal 6** use the `drupal_boost6.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal_boost6.conf;`.
+  * On **drupal 6** use the `drupal_boost6.conf` config in your vhost
+    (`server` block): `include sites-availables/drupal_boost6.conf;`.
    
-    * On **drupal 6** if having to serve URIs that need to be
-      **escaped**, e.g., that have `+` and/or `?` then use the
-      `drupal_boost6_escaped.conf` config in your
-       vhost (`server` block): `include sites-available/drupal_boost6_escaped.conf`.
+  * On **drupal 6** if having to serve URIs that need to be
+    **escaped**, e.g., that have `+` and/or `?` then use the
+    `drupal_boost6_escaped.conf` config in your vhost (`server`
+    block): `include sites-available/drupal_boost6_escaped.conf`.
    
  3. I'm **not using drush** for updating and running
-      cron. Additionally you should also include the
-      `drupal_cron_update.conf` config in your vhost (`server`
-      block): `include sites-availables/drupal_cron_update.conf;`
+    cron. Additionally you should also include the
+    `drupal_cron_update.conf` config in your vhost (`server` block):
+    `include sites-availables/drupal_cron_update.conf;`
       
  4. I'm using **drupal 8**. Just use the drupal 7 configuration. The
     only thing that changes so far is the location of `install.php`.
