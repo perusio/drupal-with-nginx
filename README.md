@@ -256,7 +256,10 @@ This is strictly a **drupal 6** issue.
    18. [Microcaching](http://fennb.com/microcaching-speed-your-app-up-250x-with-no-n)
        support for both **anonymous** and **authenticated** users.
        
-   19. Support for drupal 8.     
+   19. Support for escaped URIs, i.e., URIs that require percent
+       encoding.
+       
+   20. Support for drupal 8.     
            
 ## Secure HTTP aka SSL/TLS support
 
@@ -717,47 +720,45 @@ replace** the indicated address by **your** address.
    
    4. Setup the PHP handling method. It can be:
    
-      + Upstream HTTP server like Apache with mod_php. To use this
-        method comment out the `include upstream_phpcgi.conf;`
-        line in `nginx.conf` and uncomment the lines:
+    + Upstream HTTP server like Apache with mod_php. To use this
+      method comment out the `include upstream_phpcgi.conf;` line in
+      `nginx.conf` and uncomment the lines:
         
-            include reverse_proxy.conf;
-            include upstream_phpapache.conf;
+          include reverse_proxy.conf;
+          include upstream_phpapache.conf;
 
-        Now you must set the proper address and port for your
-        backend(s) in the `upstream_phpapache.conf`. By default it
-        assumes the loopback `127.0.0.1` interface on port
-        `8080`. Adjust accordingly to reflect your setup.
+      Now you must set the proper address and port for your backend(s)
+      in the `upstream_phpapache.conf`. By default it assumes the
+      loopback `127.0.0.1` interface on port `8080`. Adjust
+      accordingly to reflect your setup.
 
-        Comment out **all**  `fastcgi_pass` directives in either
-        `drupal_boost.conf` or `drupal_boost_drush.conf`, depending
-        which config layout you're using. Uncomment out all the
-        `proxy_pass` directives. They have a comment around them,
-        stating these instructions.
+      Comment out **all** `fastcgi_pass` directives in either
+      `drupal_boost.conf` or `drupal_boost_drush.conf`, depending
+      which config layout you're using. Uncomment out all the
+      `proxy_pass` directives. They have a comment around them,
+      stating these instructions.
       
-      + FastCGI process using php-cgi. In this case an
-        [init script](https://github.com/perusio/php-fastcgi-debian-script
-        "Init script for php-cgi") is
-        required. This is how the server is configured out of the
-        box. It uses UNIX sockets. You can use TCP sockets if you prefer.
+    + FastCGI process using php-cgi. In this case an
+      [init script](https://github.com/perusio/php-fastcgi-debian-script
+      "Init script for php-cgi") is required. This is how the server
+      is configured out of the box. It uses UNIX sockets. You can use
+      TCP sockets if you prefer.
       
-      + [PHP FPM](http://www.php-fpm.org "PHP FPM"), this requires you
-        to configure your fpm setup, in Debian/Ubuntu this is done in
-        the `/etc/php5/fpm` directory.
+    + [PHP FPM](http://www.php-fpm.org "PHP FPM"), this requires you
+      to configure your fpm setup, in Debian/Ubuntu this is done in
+      the `/etc/php5/fpm` directory.
        
-         Look
-         [here](https://github.com/perusio/php-fpm-example-config) for
-         an **example configuration** of `php-fpm`.
-
-       
+      Look [here](https://github.com/perusio/php-fpm-example-config) for
+      an **example configuration** of `php-fpm`.
+      
       Check that the socket is properly created and is listening. This
       can be done with `netstat`, like this for UNIX sockets:
       
-         netstat --unix -l
+          netstat --unix -l
          
       And like this for TCP sockets:   
          
-         netstat -t -l
+          netstat -t -l
    
       It should display the PHP CGI socket.
    
