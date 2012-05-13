@@ -708,85 +708,84 @@ replace** the indicated address by **your** address.
 
 ## Installation
 
-   1. Move the old `/etc/nginx` directory to `/etc/nginx.old`.
+ 1. Move the old `/etc/nginx` directory to `/etc/nginx.old`.
    
-   2. Clone the git repository from github:
+ 2. Clone the git repository from github:
    
-      `git clone https://github.com/perusio/drupal-with-nginx.git`
+        `git clone https://github.com/perusio/drupal-with-nginx.git`
    
-   3. Edit the `sites-available/example.com.conf` configuration file to
-      suit your requirements. Namely replacing example.com with
-      **your** domain.
+ 3. Edit the `sites-available/example.com.conf` configuration file to
+    suit your requirements. Namely replacing example.com with **your**
+    domain.
    
-   4. Setup the PHP handling method. It can be:
+ 4. Setup the PHP handling method. It can be:
    
-    + Upstream HTTP server like Apache with mod_php. To use this
-      method comment out the `include upstream_phpcgi.conf;` line in
-      `nginx.conf` and uncomment the lines:
+  + Upstream HTTP server like Apache with mod_php. To use this method
+    comment out the `include upstream_phpcgi.conf;` line in
+    `nginx.conf` and uncomment the lines:
         
-          include reverse_proxy.conf;
-          include upstream_phpapache.conf;
+         include reverse_proxy.conf;
+         include upstream_phpapache.conf;
 
-      Now you must set the proper address and port for your backend(s)
-      in the `upstream_phpapache.conf`. By default it assumes the
-      loopback `127.0.0.1` interface on port `8080`. Adjust
-      accordingly to reflect your setup.
+    Now you must set the proper address and port for your backend(s)
+    in the `upstream_phpapache.conf`. By default it assumes the
+    loopback `127.0.0.1` interface on port `8080`. Adjust
+    accordingly to reflect your setup.
 
-      Comment out **all** `fastcgi_pass` directives in either
-      `drupal_boost.conf` or `drupal_boost_drush.conf`, depending
-      which config layout you're using. Uncomment out all the
-      `proxy_pass` directives. They have a comment around them,
-      stating these instructions.
+    Comment out **all** `fastcgi_pass` directives in either
+    `drupal_boost.conf` or `drupal_boost_drush.conf`, depending which
+    config layout you're using. Uncomment out all the `proxy_pass`
+    directives. They have a comment around them, stating these
+    instructions.
       
-    + FastCGI process using php-cgi. In this case an
+  + FastCGI process using php-cgi. In this case an
       [init script](https://github.com/perusio/php-fastcgi-debian-script
       "Init script for php-cgi") is required. This is how the server
       is configured out of the box. It uses UNIX sockets. You can use
       TCP sockets if you prefer.
       
-    + [PHP FPM](http://www.php-fpm.org "PHP FPM"), this requires you
-      to configure your fpm setup, in Debian/Ubuntu this is done in
-      the `/etc/php5/fpm` directory.
+  + [PHP FPM](http://www.php-fpm.org "PHP FPM"), this requires you to
+    configure your fpm setup, in Debian/Ubuntu this is done in the
+    `/etc/php5/fpm` directory.
        
-      Look [here](https://github.com/perusio/php-fpm-example-config) for
-      an **example configuration** of `php-fpm`.
+    Look [here](https://github.com/perusio/php-fpm-example-config) for
+    an **example configuration** of `php-fpm`.
       
-      Check that the socket is properly created and is listening. This
-      can be done with `netstat`, like this for UNIX sockets:
+    Check that the socket is properly created and is listening. This
+    can be done with `netstat`, like this for UNIX sockets:
       
           netstat --unix -l
          
-      And like this for TCP sockets:   
+    And like this for TCP sockets:   
          
           netstat -t -l
    
-      It should display the PHP CGI socket.
+    It should display the PHP CGI socket.
    
-      Note that the default socket type is UNIX and the config assumes
-      it to be listening on `unix:/tmp/php-cgi/php-cgi.socket`, if
-      using the `php-cgi`, or in `unix:/var/run/php-fpm.sock` using
-      `php-fpm` and that you should **change** to reflect your setup
-      by editing `upstream_phpcgi.conf`.
+    Note that the default socket type is UNIX and the config assumes
+    it to be listening on `unix:/tmp/php-cgi/php-cgi.socket`, if using
+    the `php-cgi`, or in `unix:/var/run/php-fpm.sock` using `php-fpm`
+    and that you should **change** to reflect your setup by editing
+    `upstream_phpcgi.conf`.
    
-   
-   5. Create the `/etc/nginx/sites-enabled` directory and enable the
-      virtual host using one of the methods described below. 
+ 5. Create the `/etc/nginx/sites-enabled` directory and enable the
+    virtual host using one of the methods described below. 
       
-      Note that if you're using the
-      [nginx_ensite](http://github.com/perusio/nginx_ensite) script
-      described below it **creates** the `/etc/nginx/sites-enabled`
-      directory if it doesn't exist the first time you run it for
-      enabling a site.
+    Note that if you're using the
+    [nginx_ensite](http://github.com/perusio/nginx_ensite) script
+    described below it **creates** the `/etc/nginx/sites-enabled`
+    directory if it doesn't exist the first time you run it for
+    enabling a site.
     
-   6. Reload Nginx:
+ 6. Reload Nginx:
    
-      `/etc/init.d/nginx reload`
+        /etc/init.d/nginx reload
    
-   7. Check that your site is working using your browser.
+ 7. Check that your site is working using your browser.
    
-   8. Remove the `/etc/nginx.old` directory.
+ 8. Remove the `/etc/nginx.old` directory.
    
-   9. Done.
+ 9. Done.
    
 ## Enabling and Disabling Virtual Hosts
 
