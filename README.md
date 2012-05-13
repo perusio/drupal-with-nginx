@@ -75,25 +75,67 @@ Furthermore there are **two** options for each configuration:
       wrapper** that comes with drush not to to the `drush.php`
       script. If using `drush.php` then add `php` in front of the
       `/path/to/drush.php`.
-    
+
+## Escaped URIs
+
+It happens that some sites have URIs that use
+[reserved characters](https://en.wikipedia.org/wiki/Percent-encoding#Percent-encoding_reserved_characters). In
+that case because we're not using **any rewrite** and since Nginx
+makes the exact matching of locations without escaping the reserved
+characters present in a URI we must use another mechanism for
+performing the escape. I've opted for the
+[`set_by_lua`](http://wiki.nginx.org/HttpLuaModule#set_by_lua)
+directive made available by the
+[Embedded Lua](http://wiki.nginx.org/HttpLuaModule) module. This
+module provides a method
+[`ngx.escape_uri`](http://wiki.nginx.org/HttpLuaModule#ngx.escape_uri)
+that encodes a URI.
+
+    ## Drupal 7 site. We define a new variable that has the escaped
+    ## URI as value.
+    set_by_lua $escaped_uri 'return ngx.escape_uri($uri)';
+
+This means that each configuration has an **escaped uri**
+version.
+
 ## Configuration Selection Algorithm
 
  1. I'm **not** using [Boost](http://drupal.org/project/boost):   
    
     * On **drupal 7** use the `drupal.conf` config in your vhost (`server`
       block): `include sites-availables/drupal.conf;`.
-      
+    
+    * On **drupal 6** having to serve URIs that need to be
+      **escaped**, e.g., that have `+` and/or `?` then use the
+      `drupal_escaped.conf` config in your
+       vhost (`server` block): `include sites-available/drupal_escaped.conf`.
+       
     * On **drupal 6** use the `drupal6.conf` config in your vhost (`server`
       block): `include sites-availables/drupal6.conf;`.
+    
+    * On **drupal 6** if having to serve URIs that need to be
+      **escaped**, e.g., that have `+` and/or `?` then use the
+      `drupal6_escaped.conf` config in your
+       vhost (`server` block): `include sites-available/drupal6_escaped.conf`.
     
  2. I'm using [Boost](http://drupal.org/project/boost) for caching
       on my drupal site.
       
     * On **drupal 7** use the `drupal_boost.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_boost.conf;`.
-      
+
+    * On **drupal 7** if having to serve URIs that need to be **escaped**,
+      e.g., that have `+` and/or `?` then use the
+      `drupal_boost_escaped.conf` config in your
+       vhost (`server` block): `include sites-available/drupal_boost_escaped.conf`.
+
     * On **drupal 6** use the `drupal_boost6.conf` config in your vhost (`server`
       block): `include sites-availables/drupal_boost6.conf;`.
+   
+    * On **drupal 6** if having to serve URIs that need to be
+      **escaped**, e.g., that have `+` and/or `?` then use the
+      `drupal_boost6_escaped.conf` config in your
+       vhost (`server` block): `include sites-available/drupal_boost6_escaped.conf`.
    
  3. I'm **not using drush** for updating and running
       cron. Additionally you should also include the
