@@ -105,7 +105,7 @@ version.
   * On **drupal 7** use the `drupal.conf` config in your vhost
     (`server` block): `include sites-availables/drupal.conf;`.
     
-  * On **drupal 6** having to serve URIs that need to be **escaped**,
+  * On **drupal 7** having to serve URIs that need to be **escaped**,
     e.g., that have `+` and/or `?` then use the `drupal_escaped.conf`
     config in your vhost (`server` block): 
     `include sites-available/drupal_escaped.conf`.
