@@ -259,7 +259,10 @@ This is strictly a **drupal 6** issue.
    19. Support for escaped URIs, i.e., URIs that require percent
        encoding.
        
-   20. Support for drupal 8.     
+   20. [ETag](https://en.wikipedia.org/wiki/HTTP_ETag) support. This
+       requires a Nginx version greater or equal to **1.3.3**.
+       
+   21. Support for drupal 8.     
            
 ## Secure HTTP aka SSL/TLS support
 
@@ -469,6 +472,27 @@ This is strictly a **drupal 6** issue.
    server. In that case tweak the value of `limit_conn` until you have
    a working setup. This number must be as small as possible as a way
    to mitigate the potential for DoS attacks.
+
+## ETag support
+
+   [ETags](https://en.wikipedia.org/wiki/HTTP_ETag) are an additional
+   facility to help caching of static assets on the web. Usually based
+   on the file **modification time** a hash is generated. The hash is
+   sent as an additional header to the client. Here's an example of a
+   request reply with an ETag:
+   
+       HTTP/1.1 200 OK
+       Server: nginx
+       Date: Mon, 17 Sep 2012 17:46:36 GMT
+       Content-Type: image/png
+       Content-Length: 5399
+       Last-Modified: Wed, 02 May 2012 16:36:16 GMT
+       Connection: keep-alive
+       Keep-Alive: timeout=10
+       ETag: "4fa16280-1517"
+       Expires: Thu, 01 Jan 1970 00:00:01 GMT
+       Cache-Control: no-cache
+       Accept-Ranges: bytes
 
 ## Image hotlinking protection
 
@@ -705,6 +729,9 @@ directive with the `ipv6only=on` parameter.
 Note that the IPv6 address uses an IP _stolen_ from the
 [IPv6 Wikipedia page](https://en.wikipedia.org/wiki/IPv6). You **must
 replace** the indicated address by **your** address.
+
+For Nginx versions greater or equal than 1.3.4 IPv6 and IPv4 sockets
+are **separate** by default.
 
 ## Installation
 
