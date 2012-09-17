@@ -186,7 +186,7 @@ server {
         include sites-available/microcache_long_proxy.conf;
         ## Keepalive to backend.
         proxy_http_version 1.1;
-        proxy_pass http://backend_web$request_uri;
+        proxy_pass http://backend_web/;
         ## Send a special header detailing the scheme.
         proxy_set_header X-Forwarded-Proto $scheme;
         # proxy_redirect http://example.com /;
@@ -204,34 +204,56 @@ server {
         proxy_max_temp_file_size 6M;
     }
 
-    ## Backend testing/reporting location.
-    location = /lbtest {
-        if ($arg_k != 581c6b3d) {
-            return 404;
-        }
-        proxy_pass http://backend_web$request_uri;
+    ## Proxy all requests to the backends.
+    location ~* /imagecache/ {
+        ## Include the proxy cache.
+        include sites-available/microcache_long_proxy.conf;
+        ## Keepalive to backend.
+        proxy_http_version 1.1;
+        proxy_pass http://backend_web/;
+        ## Send a special header detailing the scheme.
+        proxy_set_header X-Forwarded-Proto $scheme;
+        # proxy_redirect http://example.com /;
+        ## How to deal with 'bad' backends,
+        proxy_next_upstream error timeout invalid_header http_500 http_502 http_504;
+        ## Timeout settings.
+        proxy_intercept_errors on;
+        proxy_connect_timeout 70s;
+        proxy_send_timeout 10m;
+        proxy_read_timeout 20m;
+        ## Proxy buffer tuning.
+        proxy_buffer_size 32k;
+        proxy_buffers 64 4k;
+        proxy_busy_buffers_size 64k;
+        proxy_max_temp_file_size 6M;
     }
+
 
     ## Serve aggregated JS and CSS files.
     location ^~ /sites/default/files/js/js_ {
         location ~* ^/sites/default/files/js/js_[[:alnum:]]+\.js$ {
             ## Include the proxy cache.
-            include sites-available/microcache_long_proxy.conf;
+            include sites-available/static_cache.conf;
+            ## ETag support. This requires an Nginx version >= 1.3.3.
+            etag on;
         }
     }
 
     location ^~ /sites/default/files/css/css_ {
         location ~* ^/sites/default/files/css/css_[[:alnum:]]+\.css$ {
             ## Include the proxy cache.
-            include sites-available/microcache_long_proxy.conf;
+            include sites-available/static_cache.conf;
+            ## ETag support. This requires an Nginx version >= 1.3.3.
+            etag on;
         }
     }
 
     ## Miscellaneous CSS and JS.
     location ~* ^.*\.(?:css|js)$ {
         ## Include the proxy cache.
-        include sites-available/microcache_long_proxy.conf;
+        include sites-available/static_cache.conf;
+        ## ETag support. This requires an Nginx version >= 1.3.3.
+        etag on;
     }
 
 } # HTTP server
-
