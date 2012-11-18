@@ -786,7 +786,10 @@ are **separate** by default.
     And like this for TCP sockets:   
          
           netstat -t -l
-   
+          
+    or
+          sudo netstat -t -l -p
+
     It should display the PHP CGI socket.
    
     Note that the default socket type is UNIX and the config assumes
