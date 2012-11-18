@@ -103,44 +103,44 @@ version.
  1. I'm **not** using [Boost](http://drupal.org/project/boost):   
    
   * On **drupal 7** use the `drupal.conf` config in your vhost
-    (`server` block): `include sites-availables/drupal.conf;`.
+    (`server` block): `include apps/drupals/drupal.conf;`.
     
   * On **drupal 7** having to serve URIs that need to be **escaped**,
     e.g., that have `+` and/or `?` then use the `drupal_escaped.conf`
     config in your vhost (`server` block): 
-    `include sites-available/drupal_escaped.conf`.
+    `include apps/drupal/drupal_escaped.conf`.
        
   * On **drupal 6** use the `drupal6.conf` config in your vhost
-    (`server` block): `include sites-availables/drupal6.conf;`.
+    (`server` block): `include apps/drupals/drupal6.conf;`.
     
   * On **drupal 6** if having to serve URIs that need to be
     **escaped**, e.g., that have `+` and/or `?` then use the
     `drupal6_escaped.conf` config in your vhost (`server` block):
-    `include sites-available/drupal6_escaped.conf`.
+    `include apps/drupal/drupal6_escaped.conf`.
     
  2. I'm using [Boost](http://drupal.org/project/boost) for caching
       on my drupal site.
       
   * On **drupal 7** use the `drupal_boost.conf` config in your vhost
-    (`server` block): `include sites-available/drupal_boost.conf;`.
+    (`server` block): `include apps/drupal/drupal_boost.conf;`.
 
   * On **drupal 7** if having to serve URIs that need to be
     **escaped**, e.g., that have `+` and/or `?` then use the
     `drupal_boost_escaped.conf` config in your vhost (`server` block):
-    `include sites-available/drupal_boost_escaped.conf`.
+    `include apps/drupal/drupal_boost_escaped.conf`.
 
   * On **drupal 6** use the `drupal_boost6.conf` config in your vhost
-    (`server` block): `include sites-available/drupal_boost6.conf;`.
+    (`server` block): `include apps/drupal/drupal_boost6.conf;`.
    
   * On **drupal 6** if having to serve URIs that need to be
     **escaped**, e.g., that have `+` and/or `?` then use the
     `drupal_boost6_escaped.conf` config in your vhost (`server`
-    block): `include sites-available/drupal_boost6_escaped.conf`.
+    block): `include apps/drupal/drupal_boost6_escaped.conf`.
    
  3. I'm **not using drush** for updating and running
     cron. Additionally you should also include the
     `drupal_cron_update.conf` config in your vhost (`server` block):
-    `include sites-available/drupal_cron_update.conf;`
+    `include apps/drupal/drupal_cron_update.conf;`
       
  4. I'm using **drupal 8**. Just use the drupal 7 configuration. The
     only thing that changes so far is the location of `install.php`.
@@ -663,18 +663,18 @@ This is strictly a **drupal 6** issue.
   microcache is enabled. If you want to use the **authenticated** user
   microcache instead comment out the line:
   
-  1. `include sites-available/microcache_fcgi.conf` if using the FCGI
+  1. `include apps/drupal/microcache_fcgi.conf` if using the FCGI
      microcache (when proxying to FCGI).
      
-  2. `include sites-available/microcache_proxy.conf` if using the
+  2. `include apps/drupal/microcache_proxy.conf` if using the
      proxy cache (proxying to Apache or other PHP handler).
  
   and uncomment:
   
-  1. `include sites-available/microcache_fcgi_auth.conf` if using the FCGI
+  1. `include apps/drupal/microcache_fcgi_auth.conf` if using the FCGI
      microcache (when proxying to FCGI).
      
-  2. `include sites-available/microcache_proxy_auth.conf` if using the
+  2. `include apps/drupal/microcache_proxy_auth.conf` if using the
      proxy cache (proxying to Apache or other PHP handler).
  
   You're set to go.
