@@ -36,7 +36,7 @@
 
 ## I'm in a hurry just show me how to install it
 
-Jump **immediately** to the [installation](perusio/drupal-with-nginx#installation).
+Jump **immediately** to the [installation](drupal-with-nginx#installation).
 I'll read up on all other stuff **later**.  
 
 ## Layout
