@@ -34,6 +34,11 @@
    mostly, from the nginx mailing list and the
    [nginx Wiki](http://wiki.nginx.org).
 
+## I'm in a hurry just show me how to install it
+
+Jump **immediately** to the [installation](drupal-with-nginx#installation).
+I'll read up on all other stuff **later**.  
+
 ## Layout
    
    The configuration comes in **two** flavors:
