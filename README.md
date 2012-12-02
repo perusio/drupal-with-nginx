@@ -94,7 +94,7 @@ The configuration has 3 main branches:
     this branch**.   
     
  3. A [master](https://github.com/perusio/drupal-with-nginx) branch if
-    you're running **both Drupal 6 and Drupql** sites only on a given
+    you're running **both Drupal 6 and Drupal 7** sites on a given
     machine **use this branch**.
 
 ## Escaped URIs
