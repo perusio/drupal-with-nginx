@@ -81,6 +81,22 @@ Furthermore there are **two** options for each configuration:
       script. If using `drush.php` then add `php` in front of the
       `/path/to/drush.php`.
 
+## Branching
+
+The configuration has 3 main branches:
+
+ 1. A [D7](https://github.com/perusio/drupal-with-nginx/tree/D7) branch
+    if you're running **Drupal 7** sites only on a given machine **use
+    this branch**.
+    
+ 2. A [D6](https://github.com/perusio/drupal-with-nginx/tree/D6) branch
+    if you're running **Drupal 6** sites only on a given machine **use
+    this branch**.   
+    
+ 3. A [master](https://github.com/perusio/drupal-with-nginx) branch if
+    you're running **both Drupal 6 and Drupql** sites only on a given
+    machine **use this branch**.
+
 ## Escaped URIs
 
 It happens that some sites have URIs that use
@@ -743,8 +759,19 @@ are **separate** by default.
  1. Move the old `/etc/nginx` directory to `/etc/nginx.old`.
    
  2. Clone the git repository from github:
-   
+  
         git clone https://github.com/perusio/drupal-with-nginx.git
+  
+    If you want to use only the Drupal specific version configuration
+    you must do one of the checkouts below: 
+     
+  * For the **D7** branch (running **only** D7 sites on the same server):
+     
+            git checkout D7
+        
+  * For the **D6** branch (running **only** D6 sites on the same server):
+     
+            git checkout D6      
    
  3. Edit the `sites-available/example.com.conf` configuration file to
     suit your requirements. Namely replacing example.com with **your**
