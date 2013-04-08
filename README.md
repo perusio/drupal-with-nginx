@@ -36,7 +36,7 @@
 
 ## I'm in a hurry just show me how to install it
 
-Jump **immediately** to the [installation](drupal-with-nginx#installation).
+Jump **immediately** to the [installation](#installation).
 I'll read up on all other stuff **later**.  
 
 ## Layout
@@ -753,6 +753,11 @@ replace** the indicated address by **your** address.
 
 For Nginx versions greater or equal than 1.3.4 IPv6 and IPv4 sockets
 are **separate** by default.
+
+Note also that socket options like `ipv6only=on` can only be specified
+**once**. Hence the use of different IPv6 addresses for the server
+block that redirects from `www` to the base domain in both HTTP and
+HTTPS servers. 
 
 ## Installation
 
