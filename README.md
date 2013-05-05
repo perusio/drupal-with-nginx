@@ -283,7 +283,9 @@ This is strictly a **drupal 6** issue.
    20. [ETag](https://en.wikipedia.org/wiki/HTTP_ETag) support. This
        requires a Nginx version greater or equal to **1.3.3**.
        
-   21. Support for drupal 8.     
+   21. Support for drupal 8.
+   
+   22. Support for the [`file_force`](http:/drupal.org/project/file-force) module.
            
 ## Secure HTTP aka SSL/TLS support
 
@@ -865,6 +867,13 @@ HTTPS servers.
    the virtual hosts configured in `sites-enabled` will be available
    for Nginx to serve.
 
+
+## Troubleshooting
+
+If by any reason you have some kind of error, please get a
+[debug log](http://nginx.org/en/docs/debugging_log.html) and paste it
+in a [Gist](https://gist.github.com) and **open an issue** on the
+github issue queue for the module.
 
 ## Acessing the php-fpm status and ping pages
 
