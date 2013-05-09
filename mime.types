@@ -2,11 +2,12 @@
 types {
     text/html                             html htm shtml;
     text/css                              css;
-    text/xml                              xml rss;
+    text/xml                              xml;
     image/gif                             gif;
     image/jpeg                            jpeg jpg;
     application/x-javascript              js;
     application/atom+xml                  atom;
+    application/rss+xml                   rss;
 
     text/mathml                           mml;
     text/plain                            txt;
@@ -21,8 +22,10 @@ types {
     image/x-jng                           jng;
     image/x-ms-bmp                        bmp;
     image/svg+xml                         svg svgz;
+    image/webp                            webp;
 
     application/java-archive              jar war ear;
+    application/json                      json;
     application/mac-binhex40              hqx;
     application/msword                    doc;
     application/pdf                       pdf;
@@ -32,6 +35,8 @@ types {
     application/vnd.ms-powerpoint         ppt;
     application/vnd.wap.wmlc              wmlc;
     application/vnd.wap.xhtml+xml         xhtml;
+    application/vnd.google-earth.kml+xml  kml;
+    application/vnd.google-earth.kmz      kmz;
     application/x-7z-compressed           7z;
     application/x-cocoa                   cco;
     application/x-java-archive-diff       jardiff;
@@ -49,6 +54,43 @@ types {
     application/x-xpinstall               xpi;
     application/zip                       zip;
 
+    application/vnd.oasis.opendocument.chart                   odc;
+    application/vnd.oasis.opendocument.chart-template          otc;
+    application/vnd.oasis.opendocument.database                odb;
+    application/vnd.oasis.opendocument.formula                 odf;
+    application/vnd.oasis.opendocument.formula-template       odft;
+    application/vnd.oasis.opendocument.graphics                odg;
+    application/vnd.oasis.opendocument.graphics-template       otg;
+    application/vnd.oasis.opendocument.image                   odi;
+    application/vnd.oasis.opendocument.image-template          oti;
+    application/vnd.oasis.opendocument.presentation            odp;
+    application/vnd.oasis.opendocument.presentation-template   otp;
+    application/vnd.oasis.opendocument.spreadsheet             ods;
+    application/vnd.oasis.opendocument.spreadsheet-template    ots;
+    application/vnd.oasis.opendocument.text-master             otm;
+    application/vnd.oasis.opendocument.text                    odt;
+    application/vnd.oasis.opendocument.text-template           ott;
+    application/vnd.oasis.opendocument.text-web                oth;
+    application/vnd.openofficeorg.extension                    oxt;
+    application/vnd.openxmlformats-officedocument.presentationml.presentation     pptx;
+    application/vnd.openxmlformats-officedocument.presentationml.slideshow        ppsx;
+    application/vnd.openxmlformats-officedocument.presentationml.slide            sldx;
+    application/vnd.openxmlformats-officedocument.presentationml.template         potx;
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet             xlsx;
+    application/vnd.openxmlformats-officedocument.spreadsheetml.template          xltx;
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document       docx;
+    application/vnd.openxmlformats-officedocument.wordprocessingml.template       dotx;
+    application/vnd.sun.xml.calc               sxc;
+    application/vnd.sun.xml.calc.template      stc;
+    application/vnd.sun.xml.draw               sxd;
+    application/vnd.sun.xml.draw.template      std;
+    application/vnd.sun.xml.impress            sxi;
+    application/vnd.sun.xml.impress.template   sti;
+    application/vnd.sun.xml.math               sxm;
+    application/vnd.sun.xml.writer.global      sxg;
+    application/vnd.sun.xml.writer             sxw;
+    application/vnd.sun.xml.writer.template    stw;
+
     # Mime types for web fonts. Stolen from here:
     # http://seconddrawer.com.au/blog/ in part.
     application/x-font-ttf                ttf;
@@ -61,15 +103,23 @@ types {
     application/octet-stream              dmg;
     application/octet-stream              iso img;
     application/octet-stream              msi msp msm;
+    application/octet-stream              vcf;
 
     audio/midi                            mid midi kar;
-    audio/mpeg                            mp3;
+    audio/mpeg                            mpga mpega mp2 mp3;
+    audio/ogg                             ogg;
+    audio/x-m4a                           m4a;
     audio/x-realaudio                     ra;
+    audio/webm                            weba;
 
     video/3gpp                            3gpp 3gp;
-    video/mpeg                            mpeg mpg;
+    video/mp4                             mp4;
+    video/mpeg                            mpeg mpg mpe;
+    video/ogg                             ogv;
     video/quicktime                       mov;
+    video/webm                            webm;
     video/x-flv                           flv;
+    video/x-m4v                           m4v;
     video/x-mng                           mng;
     video/x-ms-asf                        asx asf;
     video/x-ms-wmv                        wmv;
