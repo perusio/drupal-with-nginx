@@ -285,7 +285,7 @@ This is strictly a **drupal 6** issue.
        
    21. Support for drupal 8.
    
-   22. Support for the [`file_force`](http:/drupal.org/project/file-force) module.
+   22. Support for the [`file_force`](http:/drupal.org/project/file_force) module.
            
 ## Secure HTTP aka SSL/TLS support
 

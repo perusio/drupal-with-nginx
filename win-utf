@@ -1,4 +1,3 @@
-
 # This map is not a full windows-1251 <> utf8 map: it does not
 # contain Serbian and Macedonian letters.  If you need a full map,
 # use contrib/unicode2nginx/win-utf map instead.
