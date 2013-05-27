@@ -285,7 +285,7 @@ This is strictly a **drupal 6** issue.
        
    21. Support for drupal 8.
    
-   22. Support for the [`file_force`](http:/drupal.org/project/file-force) module.
+   22. Support for the [`file_force`](http:/drupal.org/project/file_force) module.
            
 ## Secure HTTP aka SSL/TLS support
 
@@ -375,10 +375,15 @@ This is strictly a **drupal 6** issue.
       then accordingly change its name in drupal_boost.conf.
 
    4. Support for
-      [X-Frame-Options](https://developer.mozilla.org/en/The_X-FRAME-OPTIONS_response_header)
+      [`X-Frame-Options`](https://developer.mozilla.org/en/The_X-FRAME-OPTIONS_response_header)
       HTTP header to avoid Clickjacking attacks.
+      
+   5. Support for
+      [`X-Content-Options`](http://blogs.msdn.com/b/ie/archive/2008/09/02/ie8-security-part-vi-beta-2-update.aspx?Redirected=true)
+      for avoiding MIME type deviation from the declared
+      `Content-Type`.
 
-   5. Protection of the upload directory. You can try to bypass the
+   6. Protection of the upload directory. You can try to bypass the
       UNIX `file` utility or the PHP `Fileinfo` extension and upload a
       fake jpeg:
    
@@ -401,21 +406,21 @@ This is strictly a **drupal 6** issue.
       it always from within the Nginx config. You cannot access it
       directly from outside.
 
-   6. Use of [Strict Transport Security](http://www.chromium.org/sts
+   7. Use of [Strict Transport Security](http://www.chromium.org/sts
       "STS at chromium.org") for enhanced security. It forces during
       the specified period for the configured domain to be contacted
       only over HTTPS. Requires a modern browser to be of use, i.e.,
       **Chrome/Chromium**, **Firefox 4** or **Firefox with
       NoScript**.
       
-   7. DoS prevention with a _low_ number of connections by client
+   8. DoS prevention with a _low_ number of connections by client
       allowed: **32**. This number can be adjusted as you see fit.
    
-   8. The Drupal specific headers like `X-Drupal-Cache` provided by
+   9. The Drupal specific headers like `X-Drupal-Cache` provided by
       [pressflow](https://github.com/pressflow/6) or the `X-Generator`
       header that Drupal 7 sets are both **hidden**. 
 
-   9. Limitation of allowed HTTP methods. Out of the box only `GET`,
+   10. Limitation of allowed HTTP methods. Out of the box only `GET`,
       `HEAD` and `POST`are allowed.
       
 ## Private file handling
