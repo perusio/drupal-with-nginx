@@ -423,6 +423,8 @@ This is strictly a **drupal 6** issue.
    10. Limitation of allowed HTTP methods. Out of the box only `GET`,
       `HEAD` and `POST`are allowed.
       
+   11. Protection of the `/admin` URIs with Basic Auth.   
+      
 ## Private file handling
 
    This config assumes that **private** files are stored under a directory
@@ -561,6 +563,19 @@ This is strictly a **drupal 6** issue.
    [`limit_except`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_except)
    directive and enumerate the client IPs that are allowed to use the
    *extra* methods like `PUT`.
+
+## Protection of the `/admin` URIs using Basic Auth
+
+   Just uncomment the line that includes the
+   `apps/drupal/admin_basic_auth.conf` file. Now whenever you got to a
+   `/admin` URI the server will prompt you for a username/password
+   pair. Note that by default this config provides no
+   username/password values for the `.htpasswd-users` file. This is to
+   avoid the creeping of laziness and that 80% of the sites that have
+   the `/admin` URIs protected have the same username/password.
+   
+   Note that this is much more effective if at least all your logged
+   in traffic goes over SSL (HTTPS).
 
 ## Multisite support
 
@@ -922,7 +937,7 @@ github issue queue for the module.
    own. Generally the APT machinery will sort out for you any
    dependencies issues that might exist.
 
-## Ad and Aditional modules support
+## Ad and Additional modules support
 
    The config is quite tight in the sense that if you have something
    that is not contemplated in the **exact** match locations,
