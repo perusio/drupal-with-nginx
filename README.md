@@ -787,7 +787,7 @@ HTTPS servers.
    
  2. Clone the git repository from github:
   
-        git clone https://github.com/perusio/drupal-with-nginx.git
+        git clone https://github.com/perusio/drupal-with-nginx.git /etc/nginx
   
     If you want to use only the Drupal specific version configuration
     you must do one of the checkouts below: 
