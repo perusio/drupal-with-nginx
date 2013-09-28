@@ -5,7 +5,7 @@ types {
     text/xml                              xml;
     image/gif                             gif;
     image/jpeg                            jpeg jpg;
-    application/x-javascript              js;
+    application/javascript                js;
     application/atom+xml                  atom;
     application/rss+xml                   rss;
 
@@ -96,7 +96,7 @@ types {
     application/x-font-ttf                ttf;
     font/opentype                         otf;
     application/vnd.ms-fontobject         eot;
-    application/x-woff                    woff;
+    application/font-woff                 woff;
 
     application/octet-stream              bin exe dll;
     application/octet-stream              deb;
