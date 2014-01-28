@@ -61,7 +61,7 @@ Furthermore there are **two** options for each configuration:
       example aliases file `example.aliases.drushrc.php` that comes
       under the `examples` directory in the drush distribution.
 
-      Example: You create the aliases for example.com and example.org,
+      Example: You create the aliases for example.com and example.net,
       with aliases `@excom` and `@exnet` respectively.
 
       Your crontab should contain something like:
