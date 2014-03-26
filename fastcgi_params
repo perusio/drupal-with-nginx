@@ -27,6 +27,6 @@ fastcgi_param REDIRECT_STATUS 200;
 ## later. The if_not_empty flag was introduced in 1.1.11.  See:
 ## http://nginx.org/en/CHANGES. If using a version that doesn't
 ## support this comment out the line below.
-fastcgi_param HTTPS $https if_not_empty;
+fastcgi_param HTTPS $fastcgi_https if_not_empty;
 ## For Nginx versions below 1.1.11 uncomment the line below after commenting out the above.
-#fastcgi_param HTTPS $https;
+#fastcgi_param HTTPS $fastcgi_https;
