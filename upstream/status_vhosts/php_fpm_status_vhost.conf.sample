@@ -9,20 +9,22 @@
 ## The status page is at /fpm-status. Only local access is
 ## allowed. Non authorized access returns a 404 through the error_page
 ## directive.
-location = /fpm-status {
-    if ($dont_show_fpm_status) {
-        return 404;
+location = /phpfpmcgi-status {
+    if ($phpfpmcgi_status_acl) {
+        return 403;
     }
-    fastcgi_pass www0;
+    fastcgi_param  QUERY_STRING     /fpm-status;
+    fastcgi_pass phpfpmcgi;
 }
 
 ## The ping page is at /ping and returns the string configured at the php-fpm level.
 ## Also only local network connections (loopback and LAN) are permitted.
-location = /ping {
-    if ($dont_show_fpm_status) {
-        return 404;
+location = /phpfpmcgi-ping {
+    if ($phpfpmcgi_status_acl) {
+        return 403;
     }
-    fastcgi_pass www0;
+    fastcgi_param  QUERY_STRING     /ping;
+    fastcgi_pass phpfpmcgi;
 }
 
 ## This is for the second pool. It assumes that you've configured
@@ -32,20 +34,22 @@ location = /ping {
 ## The status page is at /fpm-status. Only local access is
 ## allowed. Non authorized access returns a 404 through the error_page
 ## directive.
-location = /fpm-status-zwei {
-    if ($dont_show_fpm_status) {
-        return 404;
+location = /phpfpmcgi-status-www0 {
+    if ($phpfpmcgi_status_acl) {
+        return 403;
     }
-    fastcgi_pass www1;
+    fastcgi_param  QUERY_STRING     /fpm-status;
+    fastcgi_pass phpfpmcgi_www0;
 }
 
 ## The ping page is at /ping and returns the string configured at the php-fpm level.
 ## Also only local network connections (loopback and LAN) are permitted.
-location = /ping-zwei {
-    if ($dont_show_fpm_status) {
-        return 404;
+location = /phpfpmcgi-ping-www0 {
+    if ($phpfpmcgi_status_acl) {
+        return 403;
     }
-    fastcgi_pass www1;
+    fastcgi_param  QUERY_STRING     /ping;
+    fastcgi_pass phpfpmcgi_www0;
 }
 
 ## This is for the third pool that acts as backup. It assumes that
@@ -56,18 +60,20 @@ location = /ping-zwei {
 ## The status page is at /fpm-status. Only local access is
 ## allowed. Non authorized access returns a 404 through the error_page
 ## directive.
-location = /fpm-status-drei {
-    if ($dont_show_fpm_status) {
-        return 404;
+location = /phpfpmcgi-status-www1 {
+    if ($phpfpmcgi_status_acl) {
+        return 403;
     }
-    fastcgi_pass phpcgi;
+    fastcgi_param  QUERY_STRING     /fpm-status;
+    fastcgi_pass phpfpmcgi_www1;
 }
 
 ## The ping page is at /ping and returns the string configured at the php-fpm level.
 ## Also only local network connections (loopback and LAN) are permitted.
-location = /ping-drei {
-    if ($dont_show_fpm_status) {
-        return 404;
+location = /phpfpmcgi-ping-www1 {
+    if ($phpfpmcgi_status_acl) {
+        return 403;
     }
-    fastcgi_pass phpcgi;
+    fastcgi_param  QUERY_STRING     /ping;
+    fastcgi_pass phpfpmcgi_www1;
 }
