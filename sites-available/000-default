@@ -10,5 +10,10 @@ server {
     #listen [fe80::202:b3ff:fe1e:8328]:80 default_server ipv6only=on; # IPv6
 
     server_name _;
+
+    ## Including the Nginx stub status page for having stats about
+    ## Nginx activity: http://wiki.nginx.org/HttpStubStatusModule.
+    include nginx_status_vhost.conf;
+
     return 444;
 }
