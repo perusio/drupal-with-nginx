@@ -24,25 +24,35 @@ upstream phpcgi {
 }
 
 ## Add a third pool as a fallback. Note that this requires php-cgi
-## side by side php-fpm. If you don't have it installed comment it
-## out.
-upstream phpcgi_backup {
-    server 127.0.0.1:9003;
+## side by side php-fpm. If you have it installed uncomment it.
+#upstream phpcgi_backup {
+    #server 127.0.0.1:9003;
     ## Create a backend connection cache. Note that this requires
     ## Nginx version greater or equal to 1.1.4.
     ## Cf. http://nginx.org/en/CHANGES. Comment out the
     ## following line if that's not the case.
-    keepalive 1;
-}
+    #keepalive 1;
+#}
 
 ## The upstreams below are used only for monitoring php-fpm status,
 
 ## The PHP TCP upstream that corresponds to the first pool: www0.
-upstream www0 {
+upstream phpcgi_www0 {
     server 127.0.0.1:9001;
 }
 
 ## The PHP TCP upstream that corresponds to the second pool: www1.
-upstream www1 {
+upstream phpcgi_www1 {
     server 127.0.0.1:9002;
+}
+
+
+### Configuration of php-fpm status and ping pages. Here we define the
+### allowed hosts using the Geo Module. http://wiki.nginx.org/HttpGeoModule
+
+geo $phpcgi_status_acl {
+    default 1;
+    127.0.0.1 0; # allow on the loopback
+    10.0.0.0/8 0; # allow on an internal network
+    192.168.1.0/24 0; # allow on an internal network
 }
