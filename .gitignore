@@ -1,7 +1,6 @@
 /*tar*
-custom/*
+custom/*.conf
 sites-available/*.conf
-!sites-available/example.com.conf
 sites-enabled/*.conf
 upstream/*.conf
 upstream/status_vhosts/*.conf
