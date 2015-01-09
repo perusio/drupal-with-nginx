@@ -14,7 +14,7 @@
 ## Access is restricted via the geo variable $acl_phpcgi_unix_status.
 ## Non authorized access returns a 403 through the error_page directive.
 
-location ^= /upstream/phpcgi_unix {
+location ^~ /upstream/phpcgi_unix {
 
     ## This location allows getting status of one pool in the backend
     location ~ /status$ {
