@@ -15,5 +15,12 @@ server {
     ## Nginx activity: http://wiki.nginx.org/HttpStubStatusModule.
     include nginx_status_vhost.conf;
 
-    return 444;
+    ## Include all declared status or ping pages for upstream backends.
+    ## Useful for load balancers that check by IP address.
+    include upstream/status_vhosts/*.conf;
+
+    ## Return empty for any other location.
+    location / {
+        return 444;
+    }
 }

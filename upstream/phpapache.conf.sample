@@ -2,8 +2,6 @@
 
 ### Upstream configuration for Apache functioning has a PHP handler.
 
-## Add as many servers as needed:
-## Cf. http://wiki.nginx.org/HttpUpstreamModule.
 ## Note that this configuration assumes by default that keepalive
 ## upstream connections are supported and that you have a Nginx
 ## version with the fair load balancer.
@@ -16,21 +14,13 @@ upstream phpapache {
 
     server 127.0.0.1:8080;
     server 127.0.0.1:8081;
+
+    ## Add a third pool as a fallback.
+    #server 127.0.0.1:8082 backup;
+
     ## Create a backend connection cache. Note that this requires
     ## Nginx version greater or equal to 1.1.4.
     ## Cf. http://nginx.org/en/CHANGES. Comment out the following
     ## line if that's not the case.
     keepalive 5;
 }
-
-## Add a third pool as a fallback. Note that this requires php-cgi
-## side by side php-fpm. If you have it installed uncomment it.
-#upstream phpapache_backup {
-    #server 127.0.0.1:8082;
-    ## Create a backend connection cache. Note that this requires
-    ## Nginx version greater or equal to 1.1.4.
-    ## Cf. http://nginx.org/en/CHANGES. Comment out the
-    ## following line if that's not the case.
-    #keepalive 1;
-#}
-

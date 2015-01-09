@@ -1,0 +1,54 @@
+# -*- mode: nginx; mode: flyspell-prog; ispell-current-dictionary: american -*-
+
+### The configuration for the status pages of php-fpm. As described in
+### http://www.php.net/manual/en/install.fpm.configuration.php.
+
+### php-fpm provides a status and a heartbeat page that is served through the web server.
+### Here's an example configuration for them.
+
+## The status page is at /upstream-status/{backend}.
+## The ping page is at /upstream-ping/{backend}.
+## Add /{pool} to query for any specific pool within the backend.
+## Pools must be configured to respond to /fpm-status and /ping.
+##
+## Access is restricted via the geo variable $acl_phpcgi_unix_status.
+## Non authorized access returns a 403 through the error_page directive.
+
+location ^= /upstream/phpcgi_unix {
+
+    ## This location allows getting status of one pool in the backend
+    location ~ /status$ {
+        if ($acl_phpcgi_unix_status) {
+            return 403;
+        }
+        fastcgi_param  QUERY_STRING     /fpm-status;
+        fastcgi_pass phpcgi_unix;
+    }
+
+    ## This location allows getting status of a specific pool
+    location ~ /status/(.+)$ {
+        if ($acl_phpcgi_unix_status) {
+            return 403;
+        }
+        fastcgi_param  QUERY_STRING     /fpm-status;
+        fastcgi_pass phpcgi_unix_$1;
+    }
+
+    ## This location allows pinging one pool in the backend
+    location ~ /ping$ {
+        if ($acl_phpcgi_unix_status) {
+            return 403;
+        }
+        fastcgi_param  QUERY_STRING     /ping;
+        fastcgi_pass phpcgi_unix;
+    }
+
+    ## This location allows pinging a specific pool
+    location ~ /ping/(.+)$ {
+        if ($acl_phpcgi_unix_status) {
+            return 403;
+        }
+        fastcgi_param  QUERY_STRING     /ping;
+        fastcgi_pass phpcgi_unix_$1;
+    }
+}
