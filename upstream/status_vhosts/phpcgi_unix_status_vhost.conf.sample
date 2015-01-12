@@ -3,52 +3,62 @@
 ### The configuration for the status pages of php-fpm. As described in
 ### http://www.php.net/manual/en/install.fpm.configuration.php.
 
+## Replace every instance of <backend> with the name you set in the upstream block
+
 ### php-fpm provides a status and a heartbeat page that is served through the web server.
 ### Here's an example configuration for them.
 
-## The status page is at /upstream-status/{backend}.
-## The ping page is at /upstream-ping/{backend}.
+## Status and Ping pages are grouped under /upstream/{backend}
+## The status page is at /upstream/{backend}/status.
+## The ping page is at /upstream/{backend}/ping.
 ## Add /{pool} to query for any specific pool within the backend.
-## Pools must be configured to respond to /fpm-status and /ping.
+## (Each pool must have its own upstream block named {backend}_{pool}.
+## Assumes pools are configured to respond to /fpm-status and /ping.
 ##
-## Access is restricted via the geo variable $acl_phpcgi_unix_status.
+## Access is restricted via the geo variable $acl_<backend>_status.
 ## Non authorized access returns a 403 through the error_page directive.
 
-location ^~ /upstream/phpcgi_unix {
+location ^~ /upstream/<backend> {
+    fastcgi_param   GATEWAY_INTERFACE       CGI/1.1;
+    fastcgi_param   SERVER_SOFTWARE         nginx/$nginx_version;
 
     ## This location allows getting status of one pool in the backend
     location ~ /status$ {
-        if ($acl_phpcgi_unix_status) {
+        if ($acl_<backend>_status) {
             return 403;
         }
-        fastcgi_param  QUERY_STRING     /fpm-status;
-        fastcgi_pass phpcgi_unix;
+        fastcgi_pass    <backend>;
+        fastcgi_index   /fpm-status;
     }
 
     ## This location allows getting status of a specific pool
     location ~ /status/(.+)$ {
-        if ($acl_phpcgi_unix_status) {
+        if ($acl_<backend>_status) {
             return 403;
         }
-        fastcgi_param  QUERY_STRING     /fpm-status;
-        fastcgi_pass phpcgi_unix_$1;
+        fastcgi_pass    <backend>_$1;
+        fastcgi_index   /fpm-status;
     }
 
     ## This location allows pinging one pool in the backend
     location ~ /ping$ {
-        if ($acl_phpcgi_unix_status) {
+        if ($acl_<backend>_status) {
             return 403;
         }
-        fastcgi_param  QUERY_STRING     /ping;
-        fastcgi_pass phpcgi_unix;
+        fastcgi_pass    <backend>;
+        fastcgi_index   /ping;
     }
 
     ## This location allows pinging a specific pool
     location ~ /ping/(.+)$ {
-        if ($acl_phpcgi_unix_status) {
+        if ($acl_<backend>_status) {
             return 403;
         }
-        fastcgi_param  QUERY_STRING     /ping;
-        fastcgi_pass phpcgi_unix_$1;
+        fastcgi_pass    <backend>_$1;
+        fastcgi_index   /ping;
+    }
+
+    location = /upstream/<backend> {
+        return 444;
     }
 }
