@@ -42,6 +42,7 @@ upstream phpcgi_unix_www1 {
 ### allowed hosts using the Geo Module. http://wiki.nginx.org/HttpGeoModule
 
 geo $acl_phpcgi_unix_status {
+    proxy 0.0.0.0/0; # Comment this line if not behind a reverse proxy, change the IP address if you have the proxy's IP address;
     default 1;
     127.0.0.1 0; # allow on the loopback
     10.0.0.0/8 0; # allow on an internal network

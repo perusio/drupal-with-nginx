@@ -15,7 +15,7 @@ upstream phpapache {
     server 127.0.0.1:8080;
     server 127.0.0.1:8081;
 
-    ## Add a third pool as a fallback.
+    ## Add a third pool as a fallback. Remember to add a monitoring upstream.
     #server 127.0.0.1:8082 backup;
 
     ## Create a backend connection cache. Note that this requires
