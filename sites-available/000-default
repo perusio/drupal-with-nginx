@@ -7,8 +7,20 @@ server {
     listen 80 default_server; # IPv4
     ## Socket options can only be specified once, hence the different
     ## address for the 'default' server.
-    listen [fe80::202:b3ff:fe1e:8328]:80 default_server ipv6only=on; # IPv6
+    #listen [fe80::202:b3ff:fe1e:8328]:80 default_server ipv6only=on; # IPv6
 
     server_name _;
-    return 444;
+
+    ## Including the Nginx stub status page for having stats about
+    ## Nginx activity: http://wiki.nginx.org/HttpStubStatusModule.
+    include nginx_status_vhost.conf;
+
+    ## Include all declared status or ping pages for upstream backends.
+    ## Useful for load balancers that check by IP address.
+    include upstream/status_vhosts/*.conf;
+
+    ## Return empty for any other location.
+    location / {
+        return 444;
+    }
 }
