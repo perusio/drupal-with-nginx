@@ -21,17 +21,10 @@
    greater security.
 
    This configuration started life as a fork of
-   [yhager's](github.com/yhager/nginx_drupal) configuration, tempered
-   by [omega8cc](http://github.com/omega8cc/nginx-for-drupal) and
-   [Brian Mercer](http://test.brianmercer.com/content/nginx-configuration-drupal)
-   (dead link) configurations. 
+   [Perusio's](https://github.com/perusio/drupal-with-nginx) configuration.
    
-   I've since then changed it substantially. Tried to remove as best
-   as I can the traces of bad habits promoted by Apache's
-   configuration logic. Namely the use of a `.htaccess` and what it
-   entails in terms or _reverse logic_ on the server
-   configuration. I've incorporated tidbits and advices gotten,
-   mostly, from the nginx mailing list and the
+   I've since then changed it somewhat. Mainly by adding or improving support for some additional Drupal modules,     as well as, removing Drupal 6 branch which in the wake of Drupal 8 release, I now consider completely obsolete.
+   I've incorporated tidbits and advices gotten mostly, from the nginx mailing list and the
    [nginx Wiki](http://wiki.nginx.org).
 
 ## I'm in a hurry just show me how to install it
