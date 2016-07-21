@@ -30,3 +30,6 @@ fastcgi_param REDIRECT_STATUS 200;
 fastcgi_param HTTPS $fastcgi_https if_not_empty;
 ## For Nginx versions below 1.1.11 uncomment the line below after commenting out the above.
 #fastcgi_param HTTPS $fastcgi_https;
+
+## Fix HTTPoxy vulnerability https://httpoxy.org/#mitigate-nginx.
+fastcgi_param HTTP_PROXY '';
