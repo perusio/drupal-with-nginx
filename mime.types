@@ -97,6 +97,7 @@ types {
     font/opentype                         otf;
     application/vnd.ms-fontobject         eot;
     application/font-woff                 woff;
+    application/font-woff                 woff2;
 
     application/octet-stream              bin exe dll;
     application/octet-stream              deb;
