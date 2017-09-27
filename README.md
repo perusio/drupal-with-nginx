@@ -21,7 +21,7 @@
    greater security.
 
    This configuration started life as a fork of
-   [yhager's](github.com/yhager/nginx_drupal) configuration, tempered
+   [yhager's](http://github.com/yhager/nginx_drupal) configuration, tempered
    by [omega8cc](http://github.com/omega8cc/nginx-for-drupal) and
    [Brian Mercer](http://test.brianmercer.com/content/nginx-configuration-drupal)
    (dead link) configurations. 
