@@ -1,3 +1,7 @@
+[![GitHub stars](https://img.shields.io/github/stars/perusio/drupal-with-nginx.svg)](https://github.com/perusio/drupal-with-nginx/)
+
+[![GitHub contributors](https://img.shields.io/github/contributors/perusio/drupal-with-nginx.svg?color=blue)](https://github.com/perusio/drupal-with-nginx/graphs/contributors)
+
 # Nginx configuration for running Drupal
 
 ## Introduction
